@@ -15,7 +15,7 @@ public class SubtractTwo {
 
         int difference = num1 - num2;
 
-        System.out.printf("The average of the three numbers is: %d", difference);
+        System.out.printf("The difference of the two number is: %d", difference);
 
     }
 }

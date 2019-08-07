@@ -12,7 +12,7 @@ public class AddThirteen {
 
         double addedThirteen = (double) (num1 + 13);
 
-        System.out.printf("The average of the three numbers is: %.2f", + addedThirteen);
+        System.out.printf("If you add 13, the new number is: %.2f", + addedThirteen);
 
     }
 }

@@ -12,7 +12,7 @@ public class DoubleAndAddFive {
 
         double doubleAndAddFive = (double) ((num1 * 2) + 5);
 
-        System.out.printf("The number now is: %.2f", + doubleAndAddFive);
+        System.out.printf("If you double your number and add 5, your new number is: %.2f", + doubleAndAddFive);
 
     }
 }

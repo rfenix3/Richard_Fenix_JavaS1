@@ -18,7 +18,7 @@ public class MultiplyThree {
 
         double productOfThree = (double) (num1 * num2 * num3);
 
-        System.out.printf("The average of the three numbers is: %.2f", + productOfThree);
+        System.out.printf("The product of the three numbers is: %.2f", + productOfThree);
 
     }
 }

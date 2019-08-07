@@ -22,8 +22,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/company/AddThirteen.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="210">
-              <caret line="14" column="86" selection-start-line="14" selection-start-column="86" selection-end-line="14" selection-end-column="86" />
+            <state relative-caret-position="270">
+              <caret line="18" lean-forward="true" selection-start-line="18" selection-end-line="18" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/company/AddFive.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="285">
+              <caret line="19" column="34" lean-forward="true" selection-start-line="7" selection-end-line="27" />
             </state>
           </provider>
         </entry>
@@ -58,8 +67,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/company/AddFiveAndDouble.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="414">
-              <caret line="28" column="63" selection-start-line="28" selection-start-column="63" selection-end-line="28" selection-end-column="63" />
+            <state relative-caret-position="270">
+              <caret line="18" lean-forward="true" selection-start-line="18" selection-end-line="18" />
             </state>
           </provider>
         </entry>
@@ -79,12 +88,12 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/src/main/java/com/company/AddFive.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/company/AddFiveAndDouble.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/company/AverageThree.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/company/AddThirteen.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/company/DoubleAndAddFive.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/company/MultiplyThree.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/company/SubtractTwo.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/company/AddThirteen.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/company/AddFiveAndDouble.java" />
       </list>
     </option>
   </component>
@@ -181,19 +190,6 @@
     </option>
   </component>
   <component name="RunManager" selected="JUnit.AllKatasTest">
-    <configuration name="SubtractTwo" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.company.SubtractTwo" />
-      <module name="U1M1L2Katas" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.company.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="AddFiveAndDoubleTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="U1M1L2Katas" />
       <extension name="coverage">
@@ -219,6 +215,21 @@
       </extension>
       <option name="PACKAGE_NAME" value="com.company" />
       <option name="MAIN_CLASS_NAME" value="com.company.AllKatasTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="DoubleAndAddFiveTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="U1M1L2Katas" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.company.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.company" />
+      <option name="MAIN_CLASS_NAME" value="com.company.DoubleAndAddFiveTest" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -257,10 +268,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="JUnit.AllKatasTest" />
-        <item itemvalue="JUnit.AddFiveAndDoubleTest" />
         <item itemvalue="JUnit.SubtractTwoTest" />
-        <item itemvalue="Application.SubtractTwo" />
         <item itemvalue="JUnit.MultiplyThreeTest" />
+        <item itemvalue="JUnit.DoubleAndAddFiveTest" />
+        <item itemvalue="JUnit.AddFiveAndDoubleTest" />
       </list>
     </recent_temporary>
   </component>
@@ -278,12 +289,6 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="AverageThreeTest - 2019.08.06 at 20h 12m 58s.xml">
-      <configuration name="AverageThreeTest" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="DoubleAndAddFiveTest - 2019.08.06 at 20h 15m 37s.xml">
-      <configuration name="DoubleAndAddFiveTest" configurationId="JUnit" />
-    </history-entry>
     <history-entry file="DoubleAndAddFiveTest - 2019.08.06 at 20h 17m 19s.xml">
       <configuration name="DoubleAndAddFiveTest" configurationId="JUnit" />
     </history-entry>
@@ -308,10 +313,15 @@
     <history-entry file="AddFiveAndDoubleTest - 2019.08.06 at 20h 24m 44s.xml">
       <configuration name="AddFiveAndDoubleTest" configurationId="JUnit" />
     </history-entry>
+    <history-entry file="AllKatasTest - 2019.08.06 at 20h 27m 36s.xml">
+      <configuration name="AllKatasTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="AddThirteenTest - 2019.08.06 at 21h 01m 53s.xml">
+      <configuration name="AddThirteenTest" configurationId="JUnit" />
+    </history-entry>
   </component>
   <component name="ToolWindowManager">
-    <frame x="155" y="23" width="1290" height="961" extended-state="0" />
-    <editor active="true" />
+    <frame x="390" y="54" width="1290" height="961" extended-state="0" />
     <layout>
       <window_info id="Favorites" side_tool="true" />
       <window_info id="Image Layers" />
@@ -319,7 +329,7 @@
       <window_info id="UI Designer" />
       <window_info id="Capture Tool" />
       <window_info id="Learn" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24959871" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24959871" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Version Control" />
       <window_info anchor="bottom" id="Terminal" />
@@ -327,7 +337,7 @@
       <window_info anchor="bottom" id="Messages" weight="0.3298731" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.3298731" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.3298731" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -347,20 +357,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="185">
           <caret line="15" column="13" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/company/AddFive.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="19" column="34" lean-forward="true" selection-start-line="7" selection-end-line="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/company/AddThirteen.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="14" column="86" selection-start-line="14" selection-start-column="86" selection-end-line="14" selection-end-column="86" />
         </state>
       </provider>
     </entry>
@@ -399,10 +395,31 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/company/AddThirteenTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="185">
+          <caret line="15" column="13" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/company/AddThirteen.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="18" lean-forward="true" selection-start-line="18" selection-end-line="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/company/AddFive.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="19" column="34" lean-forward="true" selection-start-line="7" selection-end-line="27" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/company/AddFiveAndDouble.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="414">
-          <caret line="28" column="63" selection-start-line="28" selection-start-column="63" selection-end-line="28" selection-end-column="63" />
+        <state relative-caret-position="270">
+          <caret line="18" lean-forward="true" selection-start-line="18" selection-end-line="18" />
         </state>
       </provider>
     </entry>

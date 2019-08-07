@@ -12,7 +12,7 @@ public class AddFiveAndDouble {
 
         double ans = (num1 + 5)*2;
 
-        System.out.println("Is you add 5 and double it, you new value is: " + ans);
+        System.out.println("Is you add 5 and double your number, you new value is: " + ans);
 
     }
 }
