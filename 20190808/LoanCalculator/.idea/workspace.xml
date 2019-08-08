@@ -22,8 +22,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/company/LoanCalculator.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="108">
-              <caret line="9" column="9" lean-forward="true" selection-start-line="6" selection-end-line="10" />
+            <state relative-caret-position="435">
+              <caret line="29" lean-forward="true" selection-start-line="29" selection-end-line="29" />
             </state>
           </provider>
         </entry>
@@ -56,10 +56,10 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="2792" />
-    <option name="y" value="147" />
-    <option name="width" value="1279" />
-    <option name="height" value="871" />
+    <option name="x" value="802" />
+    <option name="y" value="145" />
+    <option name="width" value="1519" />
+    <option name="height" value="907" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -240,7 +240,7 @@
     </history-entry>
   </component>
   <component name="ToolWindowManager">
-    <frame x="2792" y="147" width="1279" height="871" extended-state="0" />
+    <frame x="802" y="145" width="1519" height="907" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Favorites" side_tool="true" />
@@ -249,7 +249,7 @@
       <window_info id="UI Designer" />
       <window_info id="Capture Tool" />
       <window_info id="Learn" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.29797572" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24949153" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Version Control" />
       <window_info anchor="bottom" id="Terminal" />
@@ -257,7 +257,7 @@
       <window_info anchor="bottom" id="Messages" weight="0.3296433" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.34491634" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.3296433" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.399754" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -325,8 +325,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/company/LoanCalculator.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="108">
-          <caret line="9" column="9" lean-forward="true" selection-start-line="6" selection-end-line="10" />
+        <state relative-caret-position="435">
+          <caret line="29" lean-forward="true" selection-start-line="29" selection-end-line="29" />
         </state>
       </provider>
     </entry>
