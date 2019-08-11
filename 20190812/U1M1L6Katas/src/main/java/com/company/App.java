@@ -4,22 +4,16 @@ import java.util.Arrays;
 
 public class App {
 
+    // this main method is only for testing purpose.
     public static void main(String[] args) {
         int[] arr1 = {0,1,2,3,4,5,6,7};
         int[] arr2 = {0, -4, -3, -2, -5, -1,};
-        int[] arr3 = {3, 2, 2};
-        int[] arr4 = {4, 8};
-        int[] arr5 = {-4, 6, 3, -5};
 
         App.lessThanFive(arr1);
         App.lessThanFive(arr2);
-        App.lessThanFive(arr3);
-        App.lessThanFive(arr4);
 
         App.splitAtFive(arr1);
         App.splitAtFive(arr2);
-        App.splitAtFive(arr3);
-        App.splitAtFive(arr4);
 
     }
 
@@ -181,11 +175,11 @@ public class App {
         int[] fiveOrGreaterArray = splitFiveOrGreater(arr);
 
         // Declare multidimensional array and assign the arrays.
-        int[][] multiArray = {lessThanFiveArray, fiveOrGreaterArray};
+        int[][] twoDArray = {lessThanFiveArray, fiveOrGreaterArray};
 
-        System.out.println("splitAtFive method sample output: " + Arrays.deepToString(multiArray));
+        System.out.println("splitAtFive method sample output: " + Arrays.deepToString(twoDArray));
 
-        return multiArray;
+        return twoDArray;
 
     }
 
@@ -256,6 +250,43 @@ public class App {
 
         // Return created array.
         return fiveOrGreaterArray;
+    }
+
+    public static String[][] evensAndOdds(String[] stringArr) {
+        int oddArrayLength;
+        int evenArrayLength;
+
+        if (stringArr.length == 1){
+            oddArrayLength = 1;
+            evenArrayLength = 0;
+        } else {
+            oddArrayLength = stringArr.length / 2;
+            evenArrayLength = stringArr.length / 2;
+
+            // add 1 for evenArrayLength. i.e., 7 elements will need 3+1 array length for indexes at (0, 2, 4, 6).
+            if (stringArr.length % 2 != 0) {
+                evenArrayLength++;
+            };
+        }
+
+        String[] evenArr = new String[evenArrayLength];
+        String[] oddArr = new String[oddArrayLength];
+
+        for (int i = 0, x = 0, y = 0;  i < stringArr.length; i++) {
+            if (i % 2 == 0) {
+                evenArr[x] = stringArr[i];
+                x++;
+            } else {
+                oddArr[y] = stringArr[i];
+                y++;
+            }
+        }
+
+        String[][] twoDArray = {evenArr, oddArr};
+
+//        System.out.println("evensAndOdds method sample output: " + Arrays.deepToString(twoDArray));
+
+        return twoDArray;
     }
 
 }
