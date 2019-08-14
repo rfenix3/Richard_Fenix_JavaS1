@@ -109,9 +109,9 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="96" />
-    <option name="y" value="25" />
-    <option name="width" value="1547" />
+    <option name="x" value="899" />
+    <option name="y" value="117" />
+    <option name="width" value="1021" />
     <option name="height" value="965" />
   </component>
   <component name="ProjectView">
@@ -250,11 +250,11 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="Application.ValidNumber" />
-      <item itemvalue="Application.SomeMath" />
-      <item itemvalue="Application.ArrayFunUserArray" />
-      <item itemvalue="Application.ArrayFunReverseIt" />
       <item itemvalue="Application.ArrayFun5Words" />
+      <item itemvalue="Application.ArrayFunReverseIt" />
+      <item itemvalue="Application.ArrayFunUserArray" />
+      <item itemvalue="Application.SomeMath" />
+      <item itemvalue="Application.ValidNumber" />
     </list>
     <recent_temporary>
       <list>
