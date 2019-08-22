@@ -4,17 +4,16 @@ public class IceCreamFactory {
 
     private long customerId;
     private String customerName;
-    private String customerAddress;
-    private String contactNumber;
+
+    // Composition(has-a) shows the use of instance variables that are references of other objects.
+    private Address shippingAddress;
+    private Address billingAddress;
 
     private long orderNumber;
-
-    private String itemNumber;
-    private String itemDescription;
     private int quantity;
-    // Unit of measure = boxes, Gallons
-    private int unitOfMeasure;
-    private double unitPrice;
+
+    // Ice cream type object for customer orders etc.
+    private IceCream iceCream;
 
     private double taxRate;
     private double totalCost;

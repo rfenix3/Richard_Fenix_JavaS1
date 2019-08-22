@@ -6,11 +6,14 @@ public class IceCreamPOS {
 
     // categories = Ice Cream, Cookies, Sundaes, Premium Sundaes, Frozen Beverages
     private String category;
-    // types = Single Scoop, Double Scoop, Kid's Single Scoop, Banana Royale, Brownie Sundae
-    private String type;
-    private String flavor;
+    // orderTypes = Single Scoop, Double Scoop, Kid's Single Scoop, Banana Royale, Brownie Sundae
+    private String orderType;
+
     private boolean pickup;
     private boolean delivery;
+
+    // Ice cream type object for customer orders etc.
+    private IceCream iceCream;
 
     private double unitCost;
     private double taxRate;
