@@ -24,6 +24,10 @@ public class Car {
         carList.add(this);
     }
 
+    public Car(){
+
+    }
+
     private static int assignId(){
         int r = nextId;
         nextId++;

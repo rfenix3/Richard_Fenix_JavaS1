@@ -9,7 +9,6 @@ public class App {
     public static void main(String[] args) {
 
         int userChoice = 0;
-        int deleteId = 0;
         seedCarList();
 
         do {
@@ -22,8 +21,6 @@ public class App {
                 case 2:
                     displayCarInventory();
                     deletePrompt();
-                    //deleteId = deletePrompt();
-                    //deleteCar(deleteId);
                     System.out.println("Deleting a car...");
                     break;
                 case 3:
@@ -32,8 +29,8 @@ public class App {
                     break;
                 case 4:
                     System.out.println("Searching inventory...");
-                    int searchOption = displaySearchOption();
-                    //searchSubOptions(searchOption)
+                    int searchChoice = displaySearchOption();
+                    searchSubOption(searchChoice);
                     break;
                 case 0:
                     break;
@@ -101,30 +98,158 @@ public class App {
     public static void deletePrompt(){
         System.out.print("Enter ID to delete: ");
         int carId = Integer.parseInt(scanner.nextLine());
-        Car.getCarList().get(carId - 1);
-        Car.getCarList().remove(carId - 1);
+
+        int carIdIndex;
+        Car carObj = new Car();
+        // Use enhanced for loop to find the element based on ID
+        for (Car car: Car.getCarList()) {
+            if (car.getId() == carId) {
+                carObj = car;
+            }
+        }
+        // Get the index of the car object to be deleted.
+        carIdIndex = Car.getCarList().indexOf(carObj);
+
+        //Remove the car object from the Car list.
+        Car.getCarList().remove(carIdIndex);
     }
 
-//    public static void deleteCar(int userSelection){
-//
-//    }
 
     public static int displaySearchOption(){
-        System.out.println("=========== Search ===========");
+        System.out.println("====== *** Search Inventory *** =========");
         System.out.println("    Here are your options:");
         System.out.println("       1. by MAKE");
         System.out.println("       2. by MODEL");
         System.out.println("       3. by YEAR");
         System.out.println("       4. by COLOR");
         System.out.println("       5. by MILEAGE");
-        System.out.println("       0. Exit Program");
-        System.out.println("=====================================");
+        System.out.println("       0. Return to Main Menu");
+        System.out.println("-----------------------------------------");
         System.out.print("    Enter your choice: ");
 
         int userChoice = Integer.parseInt(scanner.nextLine());
 
         return userChoice;
+    }
 
+    public static void searchSubOption(int userChoice){
+        String userInput;
+        do {
+            switch (userChoice) {
+                case 1:
+                    System.out.print("Enter the Make: ");
+                    userInput = scanner.nextLine();
+                    userChoice = displayGroup("make", userInput);
+                    break;
+                case 2:
+                    System.out.print("Enter the Model: ");
+                    userInput = scanner.nextLine();
+                    userChoice = displayGroup("model", userInput);
+                    break;
+                case 3:
+                    System.out.print("Enter the Year: ");
+                    userInput = scanner.nextLine();
+                    userChoice = displayGroup("year", userInput);
+                    break;
+                case 4:
+                    System.out.print("Enter the color: ");
+                    userInput = scanner.nextLine();
+                    userChoice = displayGroup("color", userInput);
+                    break;
+                case 5:
+                    System.out.print("Enter miles less than: ");
+                    userInput = scanner.nextLine();
+                    userChoice = displayGroup("miles", userInput);
+                    break;
+                case 0:
+                    System.out.println("Return to Main Menu Options...");
+                    break;
+                default:
+                    System.out.println("Input not valid.");
+                    continue;
+            }
+        } while (userChoice != 0);
+
+        System.out.println("\n *** Thank you for using my application. Have a great day! ***");
+    }
+
+    public static int displayGroup(String subGroup, String criteria) {
+        System.out.println("All " + criteria + " cars in inventory: ");
+        switch (subGroup) {
+            case "make":
+                Car.getCarList()
+                        .stream()
+                        .filter(b -> b.getMake().equals(criteria))
+                        .forEach(car -> {
+                            System.out.println("===============");
+                            System.out.println("Make: " + car.getMake());
+                            System.out.println("Model: " + car.getModel());
+                            System.out.println("Year: " + car.getYear());
+                            System.out.println("Color: " + car.getColor());
+                            System.out.println("Odometer: " + car.getOdometer());
+                        });
+                break;
+            case "model":
+                Car.getCarList()
+                        .stream()
+                        .filter(b -> b.getModel().equals(criteria))
+                        .forEach(car -> {
+                            System.out.println("===============");
+                            System.out.println("Make: " + car.getMake());
+                            System.out.println("Model: " + car.getModel());
+                            System.out.println("Year: " + car.getYear());
+                            System.out.println("Color: " + car.getColor());
+                            System.out.println("Odometer: " + car.getOdometer());
+                        });
+                break;
+            case "year":
+                Car.getCarList()
+                        .stream()
+                        .filter(b -> b.getYear().equals(criteria))
+                        .forEach(car -> {
+                            System.out.println("===============");
+                            System.out.println("Make: " + car.getMake());
+                            System.out.println("Model: " + car.getModel());
+                            System.out.println("Year: " + car.getYear());
+                            System.out.println("Color: " + car.getColor());
+                            System.out.println("Odometer: " + car.getOdometer());
+                        });
+                break;
+            case "color":
+                Car.getCarList()
+                        .stream()
+                        .filter(b -> b.getColor().equals(criteria))
+                        .forEach(car -> {
+                            System.out.println("===============");
+                            System.out.println("Make: " + car.getMake());
+                            System.out.println("Model: " + car.getModel());
+                            System.out.println("Year: " + car.getYear());
+                            System.out.println("Color: " + car.getColor());
+                            System.out.println("Odometer: " + car.getOdometer());
+                        });
+                break;
+            case "miles":
+                int intCriteria = Integer.parseInt(criteria);
+                Car.getCarList()
+                        .stream()
+                        .filter(b -> b.getOdometer() < intCriteria)
+                        .forEach(car -> {
+                            System.out.println("===============");
+                            System.out.println("Make: " + car.getMake());
+                            System.out.println("Model: " + car.getModel());
+                            System.out.println("Year: " + car.getYear());
+                            System.out.println("Color: " + car.getColor());
+                            System.out.println("Odometer: " + car.getOdometer());
+                        });
+                break;
+
+            default:
+                System.out.println("none found...");
+        }
+
+        System.out.println("Press ENTER to return to Main Menu....");
+        scanner.nextLine();
+        return 0;
     }
 
 }
