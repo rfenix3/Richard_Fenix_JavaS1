@@ -1,0 +1,79 @@
+openapi: 3.0.0
+info:
+  title: Weather API
+  description: >-
+    An app that displays weather by zipcode.
+  version: 0.0.1
+servers:
+  - url: 'http://localhost:8080'
+    description: Local dev server
+paths:
+  /temp/{zipcode}:
+    get:
+      summary: Retrieves the temperature for the zipcode.
+      parameters: 
+        - name: zipcode
+          in: path
+          required: true
+          description: Zipcode of the location you would like to retrieve.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Temperature object matching given zipcode.
+          content:
+            application/json:
+              schema:
+                # we are referencing the Temperature object definition found at the bottom of the file
+                $ref: '#/components/schemas/Temperature'
+  /conditions/{zipcode}:
+    get:
+      summary: Retrieves the weather condition for the zipcode.
+      parameters: 
+        - name: zipcode
+          in: path
+          required: true
+          description: Zipcode of the location you would like to retrieve.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Temperature object matching given zipcode.
+          content:
+            application/json:
+              schema:
+                # we are referencing the Temperature object definition found at the bottom of the file
+                $ref: '#/components/schemas/Conditions'              
+                
+      
+# This section defines the Name object that goes back and forth as JSON
+components:
+  schemas:
+    Conditions:
+      type: object
+      properties:
+        zipcode:
+          type: integer
+        wind speed:
+          type: number
+        wind direction:
+          type: string
+        skies:
+          type: string
+        precipitation:
+          type: string
+        Temperature:
+          $ref: '#/components/schemas/Temperature'
+      required:
+        - zipcode
+
+    Temperature:
+      type: object
+      properties:
+        fahrenheit:
+          type: number
+        celsius:
+          type: number
+
+
+            

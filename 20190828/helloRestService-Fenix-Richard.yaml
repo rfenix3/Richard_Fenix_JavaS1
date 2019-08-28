@@ -1,0 +1,38 @@
+openapi: 3.0.0
+info:
+  title: Hello, REST
+  description: >-
+    A simple app that displays "Hello, {name}".
+  version: 0.0.1
+servers:
+  - url: 'http://localhost:8080'
+    description: Local dev server
+paths:
+  /hello/{name}:
+    get:
+      summary: Retrieves the entry for the name.
+      parameters: 
+        - name: name
+          in: path
+          required: true
+          description: ID of the name you would like to retrieve.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Name object matching given ID.
+          content:
+            application/json:
+              schema:
+                # we are referencing the Name object definition found at the bottom of the file
+                $ref: '#/components/schemas/Name'
+      
+# This section defines the Name object that goes back and forth as JSON
+components:
+  schemas:
+    Name:
+      properties:
+        name:
+          type: string
+      required: 
+        - name
