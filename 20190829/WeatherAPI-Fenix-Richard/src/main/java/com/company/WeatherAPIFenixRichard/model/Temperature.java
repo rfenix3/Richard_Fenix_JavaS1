@@ -19,4 +19,5 @@ public class Temperature {
     public void setCelsius(double celsius) {
         this.celsius = celsius;
     }
+
 }

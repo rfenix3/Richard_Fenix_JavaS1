@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class WeatherAPIController {
-    @RequestMapping(value="/day/{zipcode}", method= RequestMethod.GET)
+    @RequestMapping(value="/temp/{zipcode}", method= RequestMethod.GET)
     @ResponseStatus(value= HttpStatus.OK)
     public Temperature getTemparature(@PathVariable String zipcode)
     {
@@ -55,6 +55,19 @@ public class WeatherAPIController {
         return condition;
     }
 
+    @RequestMapping(value="/conditions", method=RequestMethod.POST)
+    @ResponseStatus(value= HttpStatus.CREATED)
+    public Condition createCondition(@RequestBody Condition condition)
+    {
+        condition.setZipcode("30338");
+        return condition;
+    }
 
+    @RequestMapping(value = "/conditions/{zipcode}", method = RequestMethod.DELETE)
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteCondition(@PathVariable("zipcode") String zipcode) {
+        // do nothing here - in a real application we would delete the entry from
+        // the data store.
+    }
 
 }
