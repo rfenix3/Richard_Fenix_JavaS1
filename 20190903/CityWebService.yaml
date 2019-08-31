@@ -1,0 +1,95 @@
+openapi: 3.0.0
+info:
+  title: City Web Service
+  description: >-
+    A simple service that allows Add, Delete, Read operations for a city list  
+    system.
+  version: 0.0.1
+servers:
+  - url: 'http://localhost:8080'
+    description: Local dev server
+paths:
+  /city:
+    post:
+      tags: [City REST Design]
+      summary: Creates a new city entry with the given information
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/City'
+      responses:
+        '201':
+          description: A city object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/City'
+        '400':
+          description: Invalid request syntax.
+        '422':
+          description: Incomplete city information. Some required fields missing.
+    get:
+      tags: [City REST Design]
+      summary: Retrieves ALL entry in the city list.
+      responses:
+        '200':
+          description: List of all cities.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/City'
+  '/city/{name}':
+    get:
+      tags: [City REST Design]
+      summary: Retrieves an entry for the city with the give name.
+      parameters:
+        - name: name
+          in: path
+          required: true
+          description: name of the city you would like to retrieve.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: City object matching given name.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/City'
+    delete:
+      tags: [City REST Design]
+      summary: Deletes the entry for the city with the given name.
+      parameters:
+        - name: name
+          in: path
+          required: true
+          description: name of the city you would like to delete.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: City successfully deleted.
+components:
+  schemas:
+    City:
+      properties:
+        name:
+          type: string
+        state:
+          type: string
+        population:
+          type: integer
+        capital:
+          type: boolean
+      required:
+        - name
+        - state
+        - model
+        - population
+        - capital
+tags:
+  - name: City REST Design
