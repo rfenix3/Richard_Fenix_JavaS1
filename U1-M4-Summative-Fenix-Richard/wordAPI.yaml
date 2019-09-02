@@ -1,0 +1,56 @@
+openapi: 3.0.0
+info:
+  title: Word API
+  description: >-
+    A simple service that allows GET retrieval of random word with definition with additional capability to POST to add new words and definitions.
+  version: 0.0.1
+servers:
+  - url: 'http://localhost:8080'
+    description: Local dev server
+paths:
+  /word:
+    get:
+      tags: [Word REST Design]
+      summary: Retrieves random words with its definition.
+      responses:
+        '200':
+          description: List of all Definition objects.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Definition'  
+    post:
+      tags: [Word REST Design]
+      summary: Creates a new word and definition entry.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Definition'
+      responses:
+        '201':
+          description: A Definition object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Definition'
+        '400':
+          description: Invalid request syntax.
+        '422':
+          description: Incomplete information. Some required fields missing.
+components:
+  schemas:
+    Definition:
+      properties:
+        word:
+          type: string
+        definition:
+          type: string
+      required:
+        - word
+        - definition
+tags:
+  - name: Word REST Design

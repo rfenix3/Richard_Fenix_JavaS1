@@ -1,0 +1,56 @@
+openapi: 3.0.0
+info:
+  title: Quote API
+  description: >-
+    A simple service that allows GET retrieval of random quotes of famous people with additional capability to POST to add new quotes.
+  version: 0.0.1
+servers:
+  - url: 'http://localhost:8080'
+    description: Local dev server
+paths:
+  /quote:
+    get:
+      tags: [Quote REST Design]
+      summary: Retrieves random quotes from famous people.
+      responses:
+        '200':
+          description: List of all Answer objects.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Quote'  
+    post:
+      tags: [Quote REST Design]
+      summary: Creates a new quote entry.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Quote'
+      responses:
+        '201':
+          description: A Quote object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Quote'
+        '400':
+          description: Invalid request syntax.
+        '422':
+          description: Incomplete information. Some required fields missing.
+components:
+  schemas:
+    Quote:
+      properties:
+        author:
+          type: string
+        quote:
+          type: string
+      required:
+        - author
+        - quote
+tags:
+  - name: Quote REST Design

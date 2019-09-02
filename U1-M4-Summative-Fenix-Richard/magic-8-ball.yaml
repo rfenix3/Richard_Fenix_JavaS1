@@ -1,0 +1,58 @@
+openapi: 3.0.0
+info:
+  title: Magic-8-Ball API
+  description: >-
+    A simple service that allows posting of questions with magic-8-ball responses.
+  version: 0.0.1
+servers:
+  - url: 'http://localhost:8080'
+    description: Local dev server
+paths:
+  /magic:
+    post:
+      tags: [Magic-8 REST Design]
+      summary: Creates a new question entry with a random Magic-8-ball response added to the entry.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              properties:
+                question:
+                  type: string
+      responses:
+        '201':
+          description: An Answer object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Answer'
+        '400':
+          description: Invalid request syntax.
+        '422':
+          description: Incomplete information. Some required fields missing.
+    get:
+      tags: [Magic-8 REST Design]
+      summary: Retrieves ALL entry in the answer list.
+      responses:
+        '200':
+          description: List of all Answer objects.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Answer'
+components:
+  schemas:
+    Answer:
+      properties:
+        question:
+          type: string
+        answer:
+          type: string
+      required:
+        - question
+        - answer
+tags:
+  - name: Magic-8 REST Design
