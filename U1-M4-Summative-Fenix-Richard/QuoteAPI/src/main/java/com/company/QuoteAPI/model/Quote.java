@@ -8,6 +8,11 @@ public class Quote {
     @NotEmpty( message="You must supply a quote for the quote.")
     private String quote;
 
+    public Quote(String author, String quote) {
+        this.author = author;
+        this.quote = quote;
+    }
+
     public String getAuthor() {
         return author;
     }

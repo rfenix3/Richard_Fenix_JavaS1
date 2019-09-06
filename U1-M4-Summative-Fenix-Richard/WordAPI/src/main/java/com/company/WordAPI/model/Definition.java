@@ -8,6 +8,11 @@ public class Definition {
     @NotEmpty( message="You must supply a definition for the word-definition.")
     private String definition;
 
+    public Definition(String word, String definition) {
+        this.word = word;
+        this.definition = definition;
+    }
+
     public String getWord() {
         return word;
     }
