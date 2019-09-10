@@ -1,0 +1,12 @@
+package com.company.RichardFenixCoffeeInventoryJpaRepository.controller;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class CoffeeInventoryApplication {
+
+    public static void main(String[] args) {
+        SpringApplication.run(CoffeeInventoryApplication.class, args);
+    }
+}
