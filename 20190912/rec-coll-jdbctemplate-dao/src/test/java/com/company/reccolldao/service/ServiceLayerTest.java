@@ -131,10 +131,6 @@ public class ServiceLayerTest {
 
     }
 
-//    @Test
-//    public void testUpdateAlbum() {
-//
-//    }
 
     @Test
     public void removeAlbum() {
@@ -176,16 +172,35 @@ public class ServiceLayerTest {
 //
 //        assertEquals();
 
-
     }
 
     @Test
     public void removeArtist() {
+        // When we remove an artist, we capture an Integer value.
+        ArgumentCaptor<Integer> integerCaptor = ArgumentCaptor.forClass(Integer.class);
+        doNothing().when(artistDao).deleteArtist(integerCaptor.capture());
+
+        service.removeArtist(5);
+
+        verify(artistDao, atLeastOnce()).deleteArtist(integerCaptor.getValue());
+
+        assertEquals(5, integerCaptor.getValue().intValue());
     }
 
 
     @Test
     public void saveFindFindAllLabel() {
+        Label label = new Label();
+        label.setName("Blue Note");
+        label.setWebsite("www.bluenote.com");
+
+        label = service.saveLabel(label);
+        Label fromService = service.findLabel(label.getId());
+        TestCase.assertEquals(label, fromService);
+
+        List<Label> lList = service.findAllLabels();
+        TestCase.assertEquals(1, lList.size());
+        TestCase.assertEquals(label, lList.get(0));
     }
 
     @Test
@@ -194,34 +209,20 @@ public class ServiceLayerTest {
 
     @Test
     public void removeLabel() {
-
-//        AlbumViewModel albumViewModel = new AlbumViewModel();
-//        Label label = new Label();
-        // Just need to have the id.
-//        label.setId(10);
-
-        /* ServiceLayer code for removing Label is:
-        public void removeLabel(int id) {
-            labelDao.deleteLabel(id);
-        }
-         */
+        // Check if we are passing the argument
+        // Check if we are running the method.
 
         // When we remove a label, we capture an Integer value.
         ArgumentCaptor<Integer> integerCaptor = ArgumentCaptor.forClass(Integer.class);
         doNothing().when(labelDao).deleteLabel(integerCaptor.capture());
 
-        // Act
         service.removeLabel(10);
 
         verify(labelDao, atLeastOnce()).deleteLabel(integerCaptor.getValue());
 
         assertEquals(10, integerCaptor.getValue().intValue());
 
-        // Are you passing the argument
-        // Are you running the method.
-
     }
-
 
     // Helper methods
     private void setUpAlbumDaoMock() {
