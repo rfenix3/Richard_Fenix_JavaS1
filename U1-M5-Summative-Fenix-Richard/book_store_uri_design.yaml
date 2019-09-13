@@ -1,0 +1,346 @@
+openapi: 3.0.0
+info:
+  title: Book Store Service
+  description: >-
+    A simple service that allows Add, Delete, Read operations for a rental store  
+    system.
+  version: 0.0.1
+servers:
+  - url: 'http://localhost:8080'
+    description: Local dev server
+paths:
+  /author:
+    post:
+      tags: [Author]
+      summary: Creates a new Author entry with the given information
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Author'
+      responses:
+        '201':
+          description: A author object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Author'
+        '400':
+          description: Invalid request syntax.
+        '422':
+          description: Incomplete author information. Some required fields missing.
+    put:
+      tags: [Author]
+      summary: Updates an Author ojbect based on information
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Author'
+      responses:
+        '200':
+          description: Author successfully updated.
+    get:
+      tags: [Author]
+      summary: Retrieves ALL entry in the author list.
+      responses:
+        '200':
+          description: List of all authors.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Author'
+  '/author/{id}':
+    get:
+      tags: [Author]
+      summary: Retrieves an author with the give author id.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: id of the author you would like to retrieve.
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Author object matching given id.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Author'
+    delete:
+      tags: [Author]
+      summary: Deletes the entry for the author with the given id.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: id of the author you would like to delete.
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Author successfully deleted.
+
+  /book:
+    post:
+      tags: [Book]
+      summary: Creates a new Book entry with the given information
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Book'
+      responses:
+        '201':
+          description: A book object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Book'
+        '400':
+          description: Invalid request syntax.
+        '422':
+          description: Incomplete book information. Some required fields missing.
+    put:
+      tags: [Book]
+      summary: Updates a Book ojbect based on information
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Book'
+      responses:
+        '200':
+          description: Author successfully updated.  
+    get:
+      tags: [Book]
+      summary: Retrieves ALL entry in the book list.
+      responses:
+        '200':
+          description: List of all books.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Book'
+  '/book/{id}':
+    get:
+      tags: [Book]
+      summary: Retrieves a book with the give book id.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: id of the book you would like to retrieve.
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Book object matching given id.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Book'
+    delete:
+      tags: [Book]
+      summary: Deletes the entry for the book with the given id.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: id of the book you would like to delete.
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Book successfully deleted.
+  '/book/author/{id}':
+    get:
+      tags: [Book]
+      summary: Retrieves all books by author Id.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: id of the author whose books you would like to retrieve.
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: List of all books.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Book'
+  /publisher:
+    post:
+      tags: [Publisher]
+      summary: Creates a new Publisher entry with the given information
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Publisher'
+      responses:
+        '201':
+          description: A publisher object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Publisher'
+        '400':
+          description: Invalid request syntax.
+        '422':
+          description: Incomplete publisher information. Some required fields missing.
+    put:
+      tags: [Publisher]
+      summary: Updates a Publisher ojbect based on information
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Publisher'
+      responses:
+        '200':
+          description: Publisher successfully updated.  
+    get:
+      tags: [Publisher]
+      summary: Retrieves ALL entry in the publisher list.
+      responses:
+        '200':
+          description: List of all publishers.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Publisher'
+  /publisher/{id}:
+    get:
+      tags: [Publisher]
+      summary: Retrieves a publisher with the give book id.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: id of the book you would like to retrieve.
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Publisher object matching given id.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Publisher'
+    delete:
+      tags: [Publisher]
+      summary: Deletes the entry for the publisher with the given id.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: id of the publisher you would like to delete.
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Publisher successfully deleted.
+
+
+components:
+  schemas:
+    Author:
+      properties:
+        authorId:
+          type: integer
+        firstName:
+          type: string
+        lastName:
+          type: string
+        street:
+          type: string
+        city:
+          type: string
+        state:
+          type: string  
+        postalCode:
+          type: string 
+        phone:
+          type: string
+        email:
+          type: string
+      required:
+        - authorId
+        - firstName
+        - lastName
+        - street
+        - city
+        - state
+        - postalCode
+        - phone
+        - email
+    Book:
+      properties:
+        bookId:
+          type: integer
+        isbn:
+          type: string
+        publishDate:
+          type: string
+          pattern: '^\d{4}-\d{2}-\d{2}$'
+        authorId:
+          type: integer
+        title:
+          type: string
+        publisherId:
+          type: integer  
+        price:
+          type: number 
+      required:
+        - bookId
+        - isbn
+        - publishDate
+        - authorId
+        - title
+        - publisherId
+        - price
+    Publisher:
+      properties:
+        publisherId:
+          type: integer
+        name:
+          type: string
+        street:
+          type: string
+        city:
+          type: string
+        state:
+          type: string  
+        postalCode:
+          type: string 
+        phone:
+          type: string
+        email:
+          type: string
+      required:
+        - publlisherId
+        - name
+        - street
+        - city
+        - state
+        - postalCode
+        - phone
+        - email
