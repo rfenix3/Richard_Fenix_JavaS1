@@ -1,6 +1,7 @@
 package com.company.RichardFenixU1M5Summative.dao;
 
 import com.company.RichardFenixU1M5Summative.dto.Author;
+import com.company.RichardFenixU1M5Summative.dto.Book;
 import com.company.RichardFenixU1M5Summative.dto.Publisher;
 import org.junit.Before;
 import org.junit.Test;
@@ -22,17 +23,17 @@ public class PublisherDaoTest {
     AuthorDao authorDao;
     @Autowired
     PublisherDao publisherDao;
-    //    @Autowired
-//    BookDao bookDao;
+    @Autowired
+    BookDao bookDao;
 
     @Before
     public void setUp() throws Exception {
         // Clean up the test db
         // Note: Game table should be deleted first since Book table has foreign keys to all other tables.
-//        List<Book> gList = bookDao.getAllBook();
-//        for (Book g : gList) {
-//            bookDao.deleteBook(g.getBookId());
-//        }
+        List<Book> gList = bookDao.getAllBook();
+        for (Book g : gList) {
+            bookDao.deleteBook(g.getBookId());
+        }
 
         List<Author> aList = authorDao.getAllAuthor();
         for (Author a : aList) {
