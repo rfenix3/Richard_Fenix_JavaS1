@@ -49,11 +49,10 @@ public class BookWebServiceController {
     }
 
     // Example:  http://localhost:8080/book/author/1 will get all books by author 1.
-    @GetMapping(path = "/author/{author_id}")
+    @RequestMapping(path = "/author/{author_id}", method = RequestMethod.GET)
     @ResponseStatus(value= HttpStatus.OK)
     public List<Book> FindBookByAuthor(@PathVariable int author_id){
         return bookDao.getBookByAuthor(author_id);
     }
-
 
 }
