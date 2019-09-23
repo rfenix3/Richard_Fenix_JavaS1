@@ -125,7 +125,6 @@ public class InvoiceDaoJdbcTemplateImpl implements InvoiceDao {
         invoice.setProcessingFee(rs.getBigDecimal("processing_fee"));
         invoice.setTotal(rs.getBigDecimal("total"));
 
-
         return invoice;
     }
 

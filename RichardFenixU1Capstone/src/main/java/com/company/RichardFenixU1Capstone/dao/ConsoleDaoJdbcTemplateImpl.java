@@ -77,6 +77,7 @@ public class ConsoleDaoJdbcTemplateImpl implements ConsoleDao {
         jdbcTemplate.update(DELETE_CONSOLE_SQL, id);
     }
 
+
     private Console mapRowToConsole(ResultSet rs, int rowNum) throws SQLException {
         Console console = new Console();
         console.setConsoleId(rs.getInt("console_id"));

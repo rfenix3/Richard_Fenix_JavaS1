@@ -68,7 +68,7 @@ public class ProcessingFeeDaoTest {
     @Test
     public void addGetDeleteProcessingFee() {
         ProcessingFee processingFee = new ProcessingFee();
-        processingFee.setProductType("CONSOLES");
+        processingFee.setProductType("Consoles");
         processingFee.setFee(new BigDecimal("14.99"));
         processingFeeDao.addProcessingFee(processingFee);
 
@@ -86,12 +86,12 @@ public class ProcessingFeeDaoTest {
     @Test
     public void getAllProcessingFees() {
         ProcessingFee processingFee = new ProcessingFee();
-        processingFee.setProductType("CONSOLES");
+        processingFee.setProductType("Consoles");
         processingFee.setFee(new BigDecimal("14.99"));
         processingFeeDao.addProcessingFee(processingFee);
 
         processingFee = new ProcessingFee();
-        processingFee.setProductType("T-SHIRTS");
+        processingFee.setProductType("T-Shirts");
         processingFee.setFee(new BigDecimal("1.98"));
         processingFeeDao.addProcessingFee(processingFee);
 
@@ -103,7 +103,7 @@ public class ProcessingFeeDaoTest {
     @Test
     public void updateProcessingFee() {
         ProcessingFee processingFee = new ProcessingFee();
-        processingFee.setProductType("CONSOLES");
+        processingFee.setProductType("Consoles");
         processingFee.setFee(new BigDecimal("14.99"));
         processingFeeDao.addProcessingFee(processingFee);
 
