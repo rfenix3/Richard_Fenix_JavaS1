@@ -33,6 +33,10 @@ public class ConsoleDaoJdbcTemplateImpl implements ConsoleDao {
     private static final String DELETE_CONSOLE_SQL =
             "delete from console where console_id = ?";
 
+    private static final String SELECT_CONSOLES_BY_MANUFACTURER_SQL =
+            "select * from console where manufacturer = ?";
+
+
     @Autowired
     public ConsoleDaoJdbcTemplateImpl(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
@@ -77,8 +81,16 @@ public class ConsoleDaoJdbcTemplateImpl implements ConsoleDao {
         jdbcTemplate.update(DELETE_CONSOLE_SQL, id);
     }
 
+    @Override
+    public List<Console> getConsolesByManufacturer(String manufacturer) {
+        return jdbcTemplate.query(
+                SELECT_CONSOLES_BY_MANUFACTURER_SQL,
+                this::mapRowToConsole,
+                manufacturer);
+    }
 
-    private Console mapRowToConsole(ResultSet rs, int rowNum) throws SQLException {
+
+        private Console mapRowToConsole(ResultSet rs, int rowNum) throws SQLException {
         Console console = new Console();
         console.setConsoleId(rs.getInt("console_id"));
         console.setModel(rs.getString("model"));

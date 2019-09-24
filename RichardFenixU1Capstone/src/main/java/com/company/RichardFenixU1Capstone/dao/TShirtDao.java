@@ -15,4 +15,8 @@ public interface TShirtDao {
 
     void deleteTShirt(int id);
 
+    List<TShirt> getTShirtsByColor(String color);
+
+    List<TShirt> getTShirtsBySize(String size);
+
 }

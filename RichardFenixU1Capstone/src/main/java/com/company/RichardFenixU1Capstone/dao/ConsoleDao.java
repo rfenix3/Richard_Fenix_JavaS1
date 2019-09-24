@@ -15,4 +15,6 @@ public interface ConsoleDao {
 
     void deleteConsole(int id);
 
+    List<Console> getConsolesByManufacturer(String manufacturer);
+
 }

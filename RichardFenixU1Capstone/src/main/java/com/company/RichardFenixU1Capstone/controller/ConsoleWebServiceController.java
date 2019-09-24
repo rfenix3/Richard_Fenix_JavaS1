@@ -25,21 +25,21 @@ public class ConsoleWebServiceController {
 
     }
 
-    @DeleteMapping(path="/{console_id}")
-    @ResponseStatus(value= HttpStatus.NO_CONTENT)
-    public void  deleteConsoleFromDB(@PathVariable int console_id) {
+    @DeleteMapping(path = "/{console_id}")
+    @ResponseStatus(value = HttpStatus.NO_CONTENT)
+    public void deleteConsoleFromDB(@PathVariable int console_id) {
         serviceLayer.removeConsole(console_id);
     }
 
     @GetMapping
-    @ResponseStatus(value=HttpStatus.OK)
+    @ResponseStatus(value = HttpStatus.OK)
     public List<Console> getConsoleListfromDB() {
-         return serviceLayer.findAllConsoles();
+        return serviceLayer.findAllConsoles();
 
     }
 
-    @GetMapping(path="/{id}")
-    @ResponseStatus(value=HttpStatus.OK)
+    @GetMapping(path = "/{id}")
+    @ResponseStatus(value = HttpStatus.OK)
     public Console getConsoleFromDB(@PathVariable int id) throws Exception {
         Console console = serviceLayer.findConsole(id);
         if (console == null) {
@@ -50,10 +50,19 @@ public class ConsoleWebServiceController {
     }
 
     @PutMapping
-    @ResponseStatus(value= HttpStatus.NO_CONTENT)
-    public void updateConsoleInDB(@RequestBody @Valid Console console){
+    @ResponseStatus(value = HttpStatus.NO_CONTENT)
+    public void updateConsoleInDB(@RequestBody @Valid Console console) {
         serviceLayer.updateConsole(console);
 
     }
 
+    @GetMapping(path = "manufacturer/{manufacturer}")
+    @ResponseStatus(value = HttpStatus.OK)
+    public List<Console> getConsolesByManufacturerfromDB(@PathVariable String manufacturer) throws Exception {
+        List<Console> gList = serviceLayer.findConsolesByManufacturer(manufacturer);
+        if (gList.size() == 0) {
+            throw new GameStoreNotFoundException("No games found.");
+        }
+        return gList;
+    }
 }

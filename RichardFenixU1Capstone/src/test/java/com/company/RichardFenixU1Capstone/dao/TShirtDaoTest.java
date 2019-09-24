@@ -130,4 +130,74 @@ public class TShirtDaoTest {
         assertEquals(new BigDecimal("14.99"), tShirt1.getPrice());
     }
 
+    @Test
+    public void getTShirtsByColor() {
+
+        TShirt tShirt = new TShirt();
+        tShirt.setSize("Small");
+        tShirt.setColor("Red");
+        tShirt.setDescription("Small red T-shirt.");
+        tShirt.setPrice(new BigDecimal("29.99"));
+        tShirt.setQuantity(20);
+        tShirtDao.addTShirt(tShirt);
+
+        tShirt = new TShirt();
+        tShirt.setSize("Medium");
+        tShirt.setColor("Blue");
+        tShirt.setDescription("Medium blue T-shirt.");
+        tShirt.setPrice(new BigDecimal("19.99"));
+        tShirt.setQuantity(24);
+        tShirtDao.addTShirt(tShirt);
+
+        tShirt = new TShirt();
+        tShirt.setSize("Small");
+        tShirt.setColor("Blue");
+        tShirt.setDescription("Small blue T-shirt.");
+        tShirt.setPrice(new BigDecimal("15.99"));
+        tShirt.setQuantity(12);
+        tShirtDao.addTShirt(tShirt);
+
+        List<TShirt> tList = tShirtDao.getTShirtsByColor("Blue");
+        assertEquals(2, tList.size());
+
+        tList = tShirtDao.getTShirtsByColor("Red");
+        assertEquals(1, tList.size());
+
+    }
+    @Test
+    public void getTShirtsBySize() {
+
+        TShirt tShirt = new TShirt();
+        tShirt.setSize("Small");
+        tShirt.setColor("Red");
+        tShirt.setDescription("Small red T-shirt.");
+        tShirt.setPrice(new BigDecimal("29.99"));
+        tShirt.setQuantity(20);
+        tShirtDao.addTShirt(tShirt);
+
+        tShirt = new TShirt();
+        tShirt.setSize("Medium");
+        tShirt.setColor("Blue");
+        tShirt.setDescription("Medium blue T-shirt.");
+        tShirt.setPrice(new BigDecimal("19.99"));
+        tShirt.setQuantity(24);
+        tShirtDao.addTShirt(tShirt);
+
+        tShirt = new TShirt();
+        tShirt.setSize("Small");
+        tShirt.setColor("Blue");
+        tShirt.setDescription("Small blue T-shirt.");
+        tShirt.setPrice(new BigDecimal("15.99"));
+        tShirt.setQuantity(12);
+        tShirtDao.addTShirt(tShirt);
+
+        List<TShirt> tList = tShirtDao.getTShirtsBySize("Small");
+        assertEquals(2, tList.size());
+
+        tList = tShirtDao.getTShirtsBySize("Medium");
+        assertEquals(1, tList.size());
+
+    }
+
+
 }

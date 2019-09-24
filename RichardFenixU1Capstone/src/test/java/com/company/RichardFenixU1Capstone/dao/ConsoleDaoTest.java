@@ -135,4 +135,43 @@ public class ConsoleDaoTest {
 
     }
 
+    @Test
+    public void getConsolesByManufacturer() {
+
+        Console console = new Console();
+        console.setModel("PS4 Pro");
+        console.setManufacturer("Sony");
+        console.setMemoryAmount("1 TB");
+        console.setProcessor("AMD Jaguar 8-core");
+        console.setPrice(new BigDecimal("349.99"));
+        console.setQuantity(30);
+        consoleDao.addConsole(console);
+
+        console = new Console();
+        console.setModel("Switch");
+        console.setManufacturer("Nintendo");
+        console.setMemoryAmount("32 GB");
+        console.setProcessor("Cortex 4-core");
+        console.setPrice(new BigDecimal("299.99"));
+        console.setQuantity(25);
+        consoleDao.addConsole(console);
+
+        console = new Console();
+        console.setModel("Family Computer Retro");
+        console.setManufacturer("Nintendo");
+        console.setMemoryAmount("8 GB");
+        console.setProcessor("Intel 4-core");
+        console.setPrice(new BigDecimal("79.99"));
+        console.setQuantity(40);
+        consoleDao.addConsole(console);
+
+        List<Console> tList = consoleDao.getConsolesByManufacturer("Nintendo");
+        assertEquals(2, tList.size());
+
+        tList = consoleDao.getConsolesByManufacturer("Sony");
+        assertEquals(1, tList.size());
+
+    }
+
+
 }

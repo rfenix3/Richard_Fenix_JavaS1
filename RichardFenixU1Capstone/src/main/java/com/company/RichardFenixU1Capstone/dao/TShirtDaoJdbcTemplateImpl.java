@@ -32,6 +32,12 @@ public class TShirtDaoJdbcTemplateImpl implements TShirtDao{
     private static final String DELETE_TSHIRT_SQL =
             "delete from t_shirt where t_shirt_id = ?";
 
+    private static final String SELECT_TSHIRTS_BY_COLOR_SQL =
+            "select * from t_shirt where color = ?";
+
+    private static final String SELECT_TSHIRTS_BY_SIZE_SQL =
+            "select * from t_shirt where size = ?";
+
     @Autowired
     public TShirtDaoJdbcTemplateImpl(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
@@ -76,6 +82,24 @@ public class TShirtDaoJdbcTemplateImpl implements TShirtDao{
         jdbcTemplate.update(DELETE_TSHIRT_SQL, id);
     }
 
+    @Override
+    public List<TShirt> getTShirtsByColor(String color) {
+        return jdbcTemplate.query(
+                SELECT_TSHIRTS_BY_COLOR_SQL,
+                this::mapRowToTShirt,
+                color);
+    }
+
+
+    @Override
+    public List<TShirt> getTShirtsBySize(String size) {
+        return jdbcTemplate.query(
+                SELECT_TSHIRTS_BY_SIZE_SQL,
+                this::mapRowToTShirt,
+                size);
+    }
+
+
     private TShirt mapRowToTShirt(ResultSet rs, int rowNum) throws SQLException {
         TShirt tShirt = new TShirt();
         tShirt.settShirtId(rs.getInt("t_shirt_id"));
@@ -88,6 +112,5 @@ public class TShirtDaoJdbcTemplateImpl implements TShirtDao{
         return tShirt;
 
     }
-
 
 }

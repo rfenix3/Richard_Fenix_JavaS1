@@ -9,7 +9,84 @@ servers:
   - url: 'http://localhost:8080'
     description: Local dev server
 paths:
-  /author:
+  /purchasing:
+    post:
+      tags: [Purchasing (Invoice View Model)]
+      summary: Creates a new Invoice entry from view model
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Invoice'
+      responses:
+        '201':
+          description: An Invoice object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Invoice'
+        '400':
+          description: Invalid request syntax.
+        '422':
+          description: Incomplete invoice view model information. Some required fields missing.
+    put:
+      tags: [Purchasing]
+      summary: Updates an Invoice object based on View Model information
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Invoice'
+      responses:
+        '200':
+          description: Invoice successfully updated.
+    get:
+      tags: [Purchasing]
+      summary: Retrieves ALL entry in the invoice list based on view model.
+      responses:
+        '200':
+          description: List of all invoices in view model format.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Invoice'
+  '/purchasing/{invoice_id}':
+    get:
+      tags: [Purchasing]
+      summary: Retrieves an invoice with the give invoice view model id.
+      parameters:
+        - name: invoice_id
+          in: path
+          required: true
+          description: id of the invoice you would like to retrieve.
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Invoice object matching given id.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Invoice'
+    delete:
+      tags: [Purchasing]
+      summary: Deletes the entry for the invoice with the given id.
+      parameters:
+        - name: invoice_id
+          in: path
+          required: true
+          description: id of the invoice you would like to delete.
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Invoice successfully deleted.
+
+  /invoice:
     post:
       tags: [Invoice]
       summary: Creates a new Invoice entry with the given information
@@ -54,12 +131,12 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Invoice'
-  '/invoice/{id}':
+  '/invoice/{invoice_id}':
     get:
       tags: [Invoice]
       summary: Retrieves an invoice with the give invoice id.
       parameters:
-        - name: id
+        - name: invoice_id
           in: path
           required: true
           description: id of the invoice you would like to retrieve.
@@ -76,7 +153,7 @@ paths:
       tags: [Invoice]
       summary: Deletes the entry for the invoice with the given id.
       parameters:
-        - name: id
+        - name: invoice_id
           in: path
           required: true
           description: id of the invoice you would like to delete.
@@ -260,6 +337,24 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Console'
+  /console/manufacturer/{manufacturer}:
+    get:
+      tags: [Console]
+      summary: Retrieves list of consoles with the give console manufacturer.
+      parameters:
+        - name: manufacturer
+          in: path
+          required: true
+          description: manufacturer of the console you would like to retrieve.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Console object list matching given manufacturer.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Console'  
   /console/{id}:
     get:
       tags: [Console]
@@ -336,6 +431,42 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/TShirt'
+  /tshirt/color/{color}:
+    get:
+      tags: [TShirt]
+      summary: Retrieves list of tshirts with the give color.
+      parameters:
+        - name: color
+          in: path
+          required: true
+          description: color of the tshirts you would like to retrieve.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: TShirt object list matching given color.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TShirt'  
+  /tshirt/size/{size}:
+    get:
+      tags: [TShirt]
+      summary: Retrieves list of tshirts with the give size.
+      parameters:
+        - name: size
+          in: path
+          required: true
+          description: size of the tshirts you would like to retrieve.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: TShirt object list matching given size.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TShirt'              
   /tshirt/{id}:
     get:
       tags: [TShirt]

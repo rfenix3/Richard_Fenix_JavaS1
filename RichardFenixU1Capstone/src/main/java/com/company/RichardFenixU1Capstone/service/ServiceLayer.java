@@ -274,6 +274,11 @@ public class ServiceLayer {
         consoleDao.deleteConsole(id);
     }
 
+    public List<Console> findConsolesByManufacturer(String manufacturer){
+        return consoleDao.getConsolesByManufacturer(manufacturer);
+    }
+
+
     // TShirt API
     //
 
@@ -301,6 +306,15 @@ public class ServiceLayer {
 
         tShirtDao.deleteTShirt(id);
     }
+
+    public List<TShirt> findTShirtsByColor(String color){
+        return tShirtDao.getTShirtsByColor(color);
+    }
+
+    public List<TShirt> findTShirtsBySize(String size){
+        return tShirtDao.getTShirtsBySize(size);
+    }
+
 
     // Game API
     //
