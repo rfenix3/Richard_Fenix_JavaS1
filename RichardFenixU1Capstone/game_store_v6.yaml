@@ -18,32 +18,32 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Invoice'
+              $ref: '#/components/schemas/Purchasing'
       responses:
         '201':
           description: An Invoice object
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Invoice'
+                $ref: '#/components/schemas/Purchasing'
         '400':
           description: Invalid request syntax.
         '422':
           description: Incomplete invoice view model information. Some required fields missing.
     put:
-      tags: [Purchasing]
+      tags: [Purchasing (Invoice View Model)]
       summary: Updates an Invoice object based on View Model information
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Invoice'
+              $ref: '#/components/schemas/Purchasing'
       responses:
         '200':
           description: Invoice successfully updated.
     get:
-      tags: [Purchasing]
+      tags: [Purchasing (Invoice View Model)]
       summary: Retrieves ALL entry in the invoice list based on view model.
       responses:
         '200':
@@ -53,10 +53,10 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Invoice'
+                  $ref: '#/components/schemas/Purchasing'
   '/purchasing/{invoice_id}':
     get:
-      tags: [Purchasing]
+      tags: [Purchasing (Invoice View Model)]
       summary: Retrieves an invoice with the give invoice view model id.
       parameters:
         - name: invoice_id
@@ -71,9 +71,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Invoice'
+                $ref: '#/components/schemas/Purchasing'
     delete:
-      tags: [Purchasing]
+      tags: [Purchasing (Invoice View Model)]
       summary: Deletes the entry for the invoice with the given id.
       parameters:
         - name: invoice_id
@@ -652,6 +652,36 @@ paths:
           description: Processing Fee successfully deleted.                
 components:
   schemas:
+    Purchasing:
+      properties:
+        invoiceId:
+          type: integer
+        name:
+          type: string
+        street:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        zipcode:
+          type: string  
+        itemType:
+          type: string 
+        itemId:
+          type: integer
+        quantity:
+          type: integer
+      required:
+        - invoiceId
+        - name
+        - street
+        - city
+        - state
+        - zipcode
+        - itemType
+        - itemId
+        - quantity
     Invoice:
       properties:
         invoiceId:

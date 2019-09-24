@@ -22,7 +22,7 @@ public class PurchasingWebServiceController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public InvoiceViewModel addInvoiceViewModelfromDB(@RequestBody @Valid InvoiceViewModel invoiceViewModel) {
+    public InvoiceViewModel addInvoiceViewModelfromDB(@RequestBody @Valid InvoiceViewModel invoiceViewModel) throws Exception{
         return serviceLayer.saveInvoiceViewModel(invoiceViewModel);
     }
 

@@ -56,7 +56,18 @@ public class ServiceLayer {
     }
 
     @Transactional
-    public InvoiceViewModel saveInvoiceViewModel(InvoiceViewModel viewModel){
+    public InvoiceViewModel saveInvoiceViewModel(InvoiceViewModel viewModel) throws Exception{
+
+        // Validate order quantity.
+        if (viewModel.getQuantity() <= 0) {
+            throw new Exception("Order quantity must greater than 0.");
+        }
+
+        // Validate state.
+        if (salesTaxRateDao.getSalesTaxRate(viewModel.getState()) == null) {
+            throw new Exception("Invalid state.");
+        }
+
         // Persist Invoice
         Invoice i = new Invoice();
         i.setName(viewModel.getName());
@@ -68,21 +79,58 @@ public class ServiceLayer {
         i.setItemId(viewModel.getItemId());
         i.setQuantity(viewModel.getQuantity());
 
+        int ivmQty = viewModel.getQuantity();
+
         // get unit_price from database
         switch(viewModel.getItemType()) {
             case "Consoles":
                 Console c = new Console();
                 c = consoleDao.getConsole(viewModel.getItemId());
+                int consoleQty = c.getQuantity();
+                if (consoleQty < ivmQty){
+                    throw new Exception("Console quantity is not enough.");
+                }
+                // Reduce console inventory by view model qty.
+                c.setQuantity(consoleQty - ivmQty);
+
+                // Update console w new quantity
+                consoleDao.updateConsole(c);
+
+                // Set invoice unit price.
                 i.setUnitPrice(c.getPrice());
                 break;
             case "T-Shirts":
                 TShirt t = new TShirt();
                 t = tShirtDao.getTShirt(viewModel.getItemId());
+                int tShirtQty = t.getQuantity();
+                if (tShirtQty < ivmQty){
+                    throw new Exception("T-Shirt quantity is not enough.");
+                }
+                // Reduce t-shirt inventory by view model qty.
+                t.setQuantity(tShirtQty - ivmQty);
+
+                // Update t-shirt w new quantity
+                tShirtDao.updateTShirt(t);
+
+                // Set invoice unit price.
                 i.setUnitPrice(t.getPrice());
+
                 break;
             case "Games":
                 Game g = new Game();
                 g = gameDao.getGame(viewModel.getItemId());
+                int gameQty = g.getQuantity();
+
+                if (gameQty < ivmQty){
+                    throw new Exception("Game quantity is not enough.");
+                }
+                // Reduce t-shirt inventory by view model qty.
+                g.setQuantity(gameQty - ivmQty);
+
+                // Update game w new quantity
+                gameDao.updateGame(g);
+
+                // Set invoice unit price.
                 i.setUnitPrice(g.getPrice());
                 break;
             default:

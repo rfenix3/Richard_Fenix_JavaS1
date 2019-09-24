@@ -38,7 +38,7 @@ public class ServiceLayerTest {
     }
 
     @Test
-    public void saveFindFindAllInvoiceViewModel() {
+    public void saveFindFindAllInvoiceViewModel() throws Exception{
         InvoiceViewModel ivm = new InvoiceViewModel();
         ivm.setName("Richard");
         ivm.setStreet("123 Johnson Ferry Rd");
