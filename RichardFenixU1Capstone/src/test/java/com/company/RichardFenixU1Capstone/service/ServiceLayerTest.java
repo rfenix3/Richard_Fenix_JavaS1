@@ -3,16 +3,17 @@ package com.company.RichardFenixU1Capstone.service;
 import com.company.RichardFenixU1Capstone.dao.*;
 import com.company.RichardFenixU1Capstone.dto.*;
 import com.company.RichardFenixU1Capstone.viewModel.InvoiceViewModel;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.ArgumentCaptor;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
 import static junit.framework.TestCase.assertEquals;
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.*;
 
 public class ServiceLayerTest {
 
@@ -37,7 +38,7 @@ public class ServiceLayerTest {
     }
 
     @Test
-    public void saveFindFindAllInvoice() {
+    public void saveFindFindAllInvoiceViewModel() {
         InvoiceViewModel ivm = new InvoiceViewModel();
         ivm.setName("Richard");
         ivm.setStreet("123 Johnson Ferry Rd");
@@ -48,21 +49,138 @@ public class ServiceLayerTest {
         ivm.setItemId(101);
         ivm.setQuantity(2);
 
-        ivm = service.saveInvoice(ivm);
+        ivm = service.saveInvoiceViewModel(ivm);
 
-        InvoiceViewModel fromService = service.findInvoice(ivm.getInvoiceId());
+        InvoiceViewModel fromService = service.findInvoiceViewModel(ivm.getInvoiceId());
 
         assertEquals(ivm, fromService);
 
     }
 
     @Test
-    public void updateInvoice() {
+    public void updateInvoiceViewModel() {
+        // In ServiceLayer,  check method's parameters: updateInvoice(invoiceViewModel viewModel);
+        // We will see the call to invoiceDao.updateInvoice(invoice);
+
+        //Instantiate an InvoiceViewModel;
+        InvoiceViewModel ivm = new InvoiceViewModel();
+
+        // Since we are not actually working with a db, we do not need to
+        // insert a new row.
+        ivm.setInvoiceId(1);  // <-- artificial Invoice ID number;
+
+        // plus other invoice properties...;
+        ivm.setName("Richard");
+        ivm.setStreet("123 Johnson Ferry Rd");
+        ivm.setCity("Marietta");
+        ivm.setState("GA");
+        ivm.setZipcode("30067");
+        ivm.setItemType("Consoles");
+        ivm.setItemId(101);
+        ivm.setQuantity(2);
+
+        ArgumentCaptor<Invoice>  invoiceCaptor = ArgumentCaptor.forClass((Invoice.class));
+        doNothing().when(invoiceDao).updateInvoice(invoiceCaptor.capture());
+
+        // Act phase. execution.
+        service.updateInvoiceViewModel(ivm);
+
+        // A phase. must be invoked one time only.
+        verify(invoiceDao, times(1)).updateInvoice(invoiceCaptor.getValue());
+
+        Invoice invoice = invoiceCaptor.getValue();
+
+        assertEquals(1, invoice.getInvoiceId());
+        assertEquals(ivm.getName(), invoice.getName());
+        assertEquals(ivm.getItemType(), invoice.getItemType());
+
     }
 
+    @Test
+    public void removeInvoiceViewModel() {
+        // When we remove a invoice, we capture an Integer value.
+        ArgumentCaptor<Integer> integerCaptor = ArgumentCaptor.forClass(Integer.class);
+        doNothing().when(invoiceDao).deleteInvoice(integerCaptor.capture());
+
+        // Act
+        service.removeInvoiceViewModel(10);
+
+        verify(invoiceDao, atLeastOnce()).deleteInvoice(integerCaptor.getValue());
+
+        Assert.assertEquals(10, integerCaptor.getValue().intValue());
+    }
+
+    @Test
+    public void saveFindFindAllInvoice() {
+        Invoice invoice = new Invoice();
+        invoice.setName("Richard");
+        invoice.setStreet("123 Johnson Ferry Rd");
+        invoice.setCity("Marietta");
+        invoice.setState("GA");
+        invoice.setZipcode("30067");
+        invoice.setItemType("Consoles");
+        invoice.setItemId(101);
+        invoice.setQuantity(2);
+        invoice.setUnitPrice(new BigDecimal("249.99"));
+        invoice.setSubtotal(new BigDecimal("499.98"));
+        invoice.setTax(new BigDecimal("34.99"));
+        invoice.setProcessingFee(new BigDecimal("14.99"));
+        invoice.setTotal(new BigDecimal("549.96"));
+
+        invoice = service.saveInvoice(invoice);
+
+        Invoice fromService = service.findInvoice(invoice.getInvoiceId());
+
+        assertEquals(invoice, fromService);
+    }
+
+    @Test
+    public void updateInvoice() {
+        //Instantiate an Invoice;
+        Invoice invoice = new Invoice();
+
+        // Since we are not actually working with a db, we do not need to
+        // insert a new row.
+        invoice.setInvoiceId(1);  // <-- artificial Invoice ID number;
+
+        // plus other invoice properties...;
+        invoice.setName("Richard");
+        invoice.setStreet("123 Johnson Ferry Rd");
+        invoice.setCity("Marietta");
+        invoice.setState("GA");
+        invoice.setZipcode("30067");
+        invoice.setItemType("Consoles");
+        invoice.setItemId(101);
+        invoice.setQuantity(2);
+
+        ArgumentCaptor<Invoice>  invoiceCaptor = ArgumentCaptor.forClass((Invoice.class));
+        doNothing().when(invoiceDao).updateInvoice(invoiceCaptor.capture());
+
+        // Act phase. execution.
+        service.updateInvoice(invoice);
+
+        // A phase. must be invoked one time only.
+        verify(invoiceDao, times(1)).updateInvoice(invoiceCaptor.getValue());
+
+        invoice = invoiceCaptor.getValue();
+
+        assertEquals(1, invoice.getInvoiceId());
+        assertEquals(invoice.getName(), invoice.getName());
+        assertEquals(invoice.getItemType(), invoice.getItemType());
+    }
 
     @Test
     public void removeInvoice() {
+        // When we remove a invoice, we capture an Integer value.
+        ArgumentCaptor<Integer> integerCaptor = ArgumentCaptor.forClass(Integer.class);
+        doNothing().when(invoiceDao).deleteInvoice(integerCaptor.capture());
+
+        // Act
+        service.removeInvoice(10);
+
+        verify(invoiceDao, atLeastOnce()).deleteInvoice(integerCaptor.getValue());
+
+        Assert.assertEquals(10, integerCaptor.getValue().intValue());
     }
 
     // Helper Methods
@@ -150,10 +268,10 @@ public class ServiceLayerTest {
     public void setUpGameDaoMock(){
         gameDao = mock(GameDaoJdbcTemplateImpl.class);
         Game game = new Game();
-        game.setGameId(27);
+        game.setGameId(1);
         game.setTitle("NBA 2k20");
         game.setEsrbRating("Everyone");
-        game.setDescripton("NBA Video Game");
+        game.setDescription("NBA Video Game");
         game.setPrice(new BigDecimal("59.99"));
         game.setStudio("EASports");
         game.setQuantity(80);
@@ -161,7 +279,7 @@ public class ServiceLayerTest {
         Game game2 = new Game();
         game2.setTitle("NBA 2k20");
         game2.setEsrbRating("Everyone");
-        game2.setDescripton("NBA Video Game");
+        game2.setDescription("NBA Video Game");
         game2.setPrice(new BigDecimal("59.99"));
         game2.setStudio("EASports");
         game2.setQuantity(80);
@@ -170,14 +288,14 @@ public class ServiceLayerTest {
         aList.add(game);
 
         doReturn(game).when(gameDao).addGame(game2);
-        doReturn(game).when(gameDao).getGame(27);
+        doReturn(game).when(gameDao).getGame(1);
         doReturn(aList).when(gameDao).getAllGames();
     }
 
     public void setUpTShirtDaoMock(){
         tShirtDao = mock(TShirtDaoJdbcTemplateImpl.class);
         TShirt tShirt = new TShirt();
-        tShirt.settShirtId(3);
+        tShirt.settShirtId(1);
         tShirt.setSize("Small");
         tShirt.setColor("Red");
         tShirt.setDescription("Small red T-shirt.");
@@ -195,7 +313,7 @@ public class ServiceLayerTest {
         aList.add(tShirt);
 
         doReturn(tShirt).when(tShirtDao).addTShirt(tShirt2);
-        doReturn(tShirt).when(tShirtDao).getTShirt(3);
+        doReturn(tShirt).when(tShirtDao).getTShirt(1);
         doReturn(aList).when(tShirtDao).getAllTShirts();
     }
 

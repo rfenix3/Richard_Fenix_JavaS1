@@ -11,7 +11,7 @@ public class Game {
     @Size(max = 50)
     private String esrbRating;
     @Size(max = 255)
-    private String descripton;
+    private String description;
     private BigDecimal price;
     @Size(max = 50)
     private String studio;
@@ -41,12 +41,12 @@ public class Game {
         this.esrbRating = esrbRating;
     }
 
-    public String getDescripton() {
-        return descripton;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDescripton(String descripton) {
-        this.descripton = descripton;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public BigDecimal getPrice() {
@@ -82,13 +82,13 @@ public class Game {
                 getQuantity() == game.getQuantity() &&
                 getTitle().equals(game.getTitle()) &&
                 getEsrbRating().equals(game.getEsrbRating()) &&
-                getDescripton().equals(game.getDescripton()) &&
+                getDescription().equals(game.getDescription()) &&
                 getPrice().equals(game.getPrice()) &&
                 getStudio().equals(game.getStudio());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getGameId(), getTitle(), getEsrbRating(), getDescripton(), getPrice(), getStudio(), getQuantity());
+        return Objects.hash(getGameId(), getTitle(), getEsrbRating(), getDescription(), getPrice(), getStudio(), getQuantity());
     }
 }

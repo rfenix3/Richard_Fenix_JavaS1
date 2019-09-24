@@ -15,4 +15,10 @@ public interface GameDao {
 
     void deleteGame(int id);
 
+    List<Game> getGamesByStudio(String studio);
+
+    List<Game> getGamesByEsrbRating(String esrbRating);
+
+    Game getGameByTitle(String game);
+
 }

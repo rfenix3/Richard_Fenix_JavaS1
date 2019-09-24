@@ -56,7 +56,7 @@ public class ServiceLayer {
     }
 
     @Transactional
-    public InvoiceViewModel saveInvoice(InvoiceViewModel viewModel){
+    public InvoiceViewModel saveInvoiceViewModel(InvoiceViewModel viewModel){
         // Persist Invoice
         Invoice i = new Invoice();
         i.setName(viewModel.getName());
@@ -124,7 +124,7 @@ public class ServiceLayer {
         return viewModel;
     }
 
-    public void updateInvoice(InvoiceViewModel viewModel) {
+    public void updateInvoiceViewModel(InvoiceViewModel viewModel) {
 
         // Update the invoice information
         Invoice i = new Invoice();
@@ -192,7 +192,7 @@ public class ServiceLayer {
     }
 
 
-    public InvoiceViewModel findInvoice(int id) {
+    public InvoiceViewModel findInvoiceViewModel(int id) {
 
         Invoice invoice= invoiceDao.getInvoice(id);
 
@@ -200,7 +200,7 @@ public class ServiceLayer {
     }
 
 
-    public List<InvoiceViewModel> findAllInvoices() {
+    public List<InvoiceViewModel> findAllInvoiceVIewModels() {
         List<Invoice> invoiceList = invoiceDao.getAllInvoices();
 
         List<InvoiceViewModel> ivmList = new ArrayList<>();
@@ -213,10 +213,38 @@ public class ServiceLayer {
     }
 
 
+    public void removeInvoiceViewModel(int id) {
+
+        invoiceDao.deleteInvoice(id);
+    }
+
+    // Invoice API
+    //
+    public Invoice saveInvoice(Invoice invoice) {
+
+        return invoiceDao.addInvoice(invoice);
+    }
+
+    public List<Invoice> findAllInvoices() {
+
+        return invoiceDao.getAllInvoices();
+    }
+
     public void removeInvoice(int id) {
 
         invoiceDao.deleteInvoice(id);
     }
+
+    public Invoice findInvoice(int id) {
+
+        return invoiceDao.getInvoice(id);
+    }
+
+    public void updateInvoice(Invoice invoice) {
+
+        invoiceDao.updateInvoice(invoice);
+    }
+
 
     // Console API
     //
@@ -300,6 +328,19 @@ public class ServiceLayer {
     public void removeGame(int id) {
 
         gameDao.deleteGame(id);
+    }
+
+    public List<Game> findGamesByStudio(String studio){
+        return gameDao.getGamesByStudio(studio);
+    }
+
+    public List<Game> findGamesByEsrbRating(String esrbRating){
+        return gameDao.getGamesByEsrbRating(esrbRating);
+    }
+
+    public Game findGameByTitle(String title) {
+
+        return gameDao.getGameByTitle(title);
     }
 
     // SalesTaxRate API

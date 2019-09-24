@@ -30,6 +30,15 @@ public class GameDaoJdbcTemplateImpl implements GameDao{
     private static final String DELETE_GAME_SQL =
             "delete from game where game_id = ?";
 
+    private static final String SELECT_GAMES_BY_STUDIO_SQL =
+            "select * from game where studio = ?";
+
+    private static final String SELECT_GAMES_BY_ESRB_SQL =
+            "select * from game where esrb_rating = ?";
+
+    private static final String SELECT_GAME_BY_TITLE_SQL =
+            "select * from game where title = ?";
+
     @Autowired
     public GameDaoJdbcTemplateImpl(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
@@ -38,7 +47,7 @@ public class GameDaoJdbcTemplateImpl implements GameDao{
     @Override
     @Transactional
     public Game addGame(Game game) {
-        jdbcTemplate.update(INSERT_GAME_SQL, game.getTitle(), game.getEsrbRating(), game.getDescripton(),
+        jdbcTemplate.update(INSERT_GAME_SQL, game.getTitle(), game.getEsrbRating(), game.getDescription(),
                 game.getPrice(), game.getStudio(), game.getQuantity());
 
         int id = jdbcTemplate.queryForObject("select LAST_INSERT_ID()", Integer.class);
@@ -64,15 +73,39 @@ public class GameDaoJdbcTemplateImpl implements GameDao{
 
     @Override
     public void updateGame(Game game) {
-        jdbcTemplate.update(UPDATE_GAME_SQL, game.getTitle(), game.getEsrbRating(), game.getDescripton(),
+        jdbcTemplate.update(UPDATE_GAME_SQL, game.getTitle(), game.getEsrbRating(), game.getDescription(),
                 game.getPrice(), game.getStudio(), game.getQuantity(), game.getGameId());
-
     }
 
     @Override
     public void deleteGame(int id) {
         jdbcTemplate.update(DELETE_GAME_SQL, id);
+    }
 
+    @Override
+    public List<Game> getGamesByStudio(String studio) {
+        return jdbcTemplate.query(
+                SELECT_GAMES_BY_STUDIO_SQL,
+                this::mapRowToGame,
+                studio);
+    }
+
+    @Override
+    public List<Game> getGamesByEsrbRating(String esrbRating) {
+        return jdbcTemplate.query(
+                SELECT_GAMES_BY_ESRB_SQL,
+                this::mapRowToGame,
+                esrbRating);
+    }
+
+    @Override
+    public Game getGameByTitle(String title) {
+        try {
+            return jdbcTemplate.queryForObject(SELECT_GAME_BY_TITLE_SQL, this::mapRowToGame, title);
+        } catch (EmptyResultDataAccessException e) {
+            // if there is no Game with this id, just return null
+            return null;
+        }
     }
 
     private Game mapRowToGame(ResultSet rs, int rowNum) throws SQLException {
@@ -80,7 +113,7 @@ public class GameDaoJdbcTemplateImpl implements GameDao{
         game.setGameId(rs.getInt("game_id"));
         game.setTitle(rs.getString("title"));
         game.setEsrbRating(rs.getString("esrb_rating"));
-        game.setDescripton(rs.getString("description"));
+        game.setDescription(rs.getString("description"));
         game.setPrice(rs.getBigDecimal("price"));
         game.setStudio(rs.getString("studio"));
         game.setQuantity(rs.getInt("quantity"));
