@@ -90,11 +90,12 @@ public class TaskerServiceLayerTest {
     @Test
     public void saveFindFindAllTaskViewModel() {
         TaskViewModel tvm = new TaskViewModel();
+
         tvm.setDescription("Mow lawn");
         tvm.setCreateDate(LocalDate.of(2019, 9, 30));
         tvm.setDueDate(LocalDate.of(2019, 10, 8 ));
         tvm.setCategory("house work");
-        tvm.setAdvertisement("Get a new phone NOW!");
+        //tvm.setAdvertisement("Get a new phone NOW!");
 
         tvm = service.newTask(tvm);
 
@@ -105,8 +106,11 @@ public class TaskerServiceLayerTest {
 
     @Test
     public void fetchTasksByCategory() {
+        List<TaskViewModel> tvmList = new ArrayList<>();
 
-        return;
+        tvmList = service.fetchTasksByCategory("house work");
+
+        assertEquals(2, tvmList.size());
     }
 
 
