@@ -1,0 +1,150 @@
+openapi: 3.0.0
+info:
+  title: Tasker Service Project
+  description: >-
+    Tasker is a simple task-tracking web service that has an advertisement feature that is provided by an Advertisement Service through Eureka.
+  version: 0.0.1
+servers:
+  - url: 'http://localhost:7979'
+    description: tasker-service
+  - url: 'http://localhost:6107'
+    description: adserver-service
+  - url: 'http://localhost:8761'
+    description: eureka-service  
+  - url: 'http://localhost:9999'
+    description: config-service 
+paths:
+  /tasks:
+    post:
+      tags: [Task View Model]
+      summary: Creates a new Task entry from view model
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TaskViewModel'
+      responses:
+        '201':
+          description: A Task object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskViewModel'
+        '400':
+          description: Invalid request syntax.
+        '422':
+          description: Incomplete task view model information. Some required fields missing.
+    put:
+      tags: [Task View Model]
+      summary: Updates atask object based on View Model information
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TaskViewModel'
+      responses:
+        '200':
+          description: Task successfully updated.
+    get:
+      tags: [Task View Model]
+      summary: Retrieves ALL entry in the task list based on view model.
+      responses:
+        '200':
+          description: List of all tasks in view model format.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TaskViewModel'
+  '/tasks/{id}':
+    get:
+      tags: [Task View Model]
+      summary: Retrieves a task with the given task view model id.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: id of the task you would like to retrieve.
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Task object matching given id.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskViewModel'
+    delete:
+      tags: [Task View Model]
+      summary: Deletes the entry for the task with the given id.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: id of the task you would like to delete.
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Task successfully deleted.
+
+  /ad:
+    get:
+      tags: [Ad Service]
+      summary: Retrieves a random advertisement from advertisement list.
+      responses:
+        '200':
+          description: List of all invoices.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Ad'
+components:
+  schemas:
+    TaskViewModel:
+      properties:
+        id:
+          type: integer
+        description:
+          type: string
+        createDate:
+          type: string
+        dueDate:
+          type: string
+        category:
+          type: string
+        advertisement:
+          type: string  
+      required:
+        - id
+        - description
+        - createDate
+        - dueDate
+    Task:
+      properties:
+        id:
+          type: integer
+        description:
+          type: string
+        createDate:
+          type: string
+        dueDate:
+          type: string
+        category:
+          type: string
+      required:
+        - id
+        - description
+        - createDate
+        - dueDate
+    Ad:
+      properties:
+        advertisement:
+          type: string
+      required:
+        - advertisement
