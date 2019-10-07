@@ -37,6 +37,7 @@ public class TaskerServiceLayerTest {
     public void setUp() throws Exception {
         setupTaskerDaoMock();
         setupAdMock();
+        //setupTaskerServiceLayerMock();
 
         service = new TaskerServiceLayer(dao, adClient);
 
@@ -95,13 +96,18 @@ public class TaskerServiceLayerTest {
         tvm.setCreateDate(LocalDate.of(2019, 9, 30));
         tvm.setDueDate(LocalDate.of(2019, 10, 8 ));
         tvm.setCategory("house work");
-        //tvm.setAdvertisement("Get a new phone NOW!");
 
         tvm = service.newTask(tvm);
 
         TaskViewModel fromService = service.fetchTask(tvm.getId());
 
-        assertEquals(tvm, fromService);
+        assertEquals(tvm.getId(), fromService.getId());
+        assertEquals(tvm.getDescription(), fromService.getDescription());
+        assertEquals(tvm.getCreateDate(), fromService.getCreateDate());
+        assertEquals(tvm.getDueDate(), fromService.getDueDate());
+        assertEquals(tvm.getCategory(), fromService.getCategory());
+        assertEquals(tvm.getAdvertisement(), fromService.getAdvertisement());
+
     }
 
     @Test
@@ -127,10 +133,10 @@ public class TaskerServiceLayerTest {
         // Below is mock retrieved output data when addTask(task2) is ran.
         Task task2 = new Task();
         //task.setId(0);
-        task.setDescription("Mow lawn");
-        task.setCreateDate(LocalDate.of(2019, 9, 30));
-        task.setDueDate(LocalDate.of(2019, 10, 8 ));
-        task.setCategory("house work");
+        task2.setDescription("Mow lawn");
+        task2.setCreateDate(LocalDate.of(2019, 9, 30));
+        task2.setDueDate(LocalDate.of(2019, 10, 8 ));
+        task2.setCategory("house work");
 
         Task task3 = new Task();  // Create task2 object.
         task3.setId(2);
