@@ -1,16 +1,19 @@
 package com.trilogyed.tasker.service;
 
+import com.netflix.discovery.converters.Auto;
 import com.trilogyed.tasker.dao.TaskerDao;
 import com.trilogyed.tasker.model.Task;
 import com.trilogyed.tasker.viewmodel.TaskViewModel;
 import com.trilogyed.tasker.util.feign.AdClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Component
+//@Component
+@Service
 public class TaskerServiceLayer {
 
     @Autowired
@@ -81,6 +84,11 @@ public class TaskerServiceLayer {
         taskViewModel.setAdvertisement(adClient.getAd());
 
         return taskViewModel;
+    }
+
+    // Task API
+    public Task saveTask(Task task){
+        return dao.createTask(task);
     }
 
     public void deleteTask(int id) {

@@ -1,12 +1,21 @@
 package com.trilogyed.tasker.viewmodel;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Null;
+import javax.validation.constraints.Size;
 import java.time.LocalDate;
 
 public class TaskViewModel {
+    @Null
     private int id;
+    @NotEmpty(message = "You must supply a value for Description.")
+    @Size(max = 255, message = "Description maximum is 255 characters in length.")
     private String description;
+    @NotEmpty(message = "You must supply a value for Create Date in the format of YYYY-MM-DD.")
     private LocalDate createDate;
+    @NotEmpty(message = "You must supply a value for Due Date in the format of YYYY-MM-DD.")
     private LocalDate dueDate;
+    @Size(max = 50, message = "Category maximum is 50 characters in length.")
     private String category;
     private String advertisement;
 

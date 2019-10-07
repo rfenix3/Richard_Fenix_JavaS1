@@ -1,12 +1,13 @@
 package com.trilogyed.tasker.model;
 
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Null;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
 import java.util.Objects;
 
 public class Task {
-
+    @Null
     private int id;
     @NotEmpty(message = "You must supply a value for Description.")
     @Size(max = 255, message = "Description maximum is 255 characters in length.")
