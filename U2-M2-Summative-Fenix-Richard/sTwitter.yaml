@@ -1,0 +1,285 @@
+openapi: 3.0.0
+info:
+  title: STwitter Project
+  description: >-
+    Stwitter (Simple Switter) Project is a stripped down social media service that runs on Eureka registry service, config servers, feign, post-services and comments-services. Code created by Richard Fenix for Java Cohort.
+  version: 0.0.1
+servers:
+  - url: 'http://localhost:8889'
+    description: stwitter-service
+  - url: 'http://localhost:1777'
+    description: post-service
+  - url: 'http://localhost:6868'
+    description: comment-service
+  - url: 'http://localhost:8761'
+    description: eureka-service  
+  - url: 'http://localhost:1999'
+    description: config-service 
+paths:
+  /post:
+    post:
+      tags: [Stwitter Edge Service]
+      summary: Creates a new Post entry through Stwitter service with the given information
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/STwitterViewModel'
+      responses:
+        '201':
+          description: A stwitter view model object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/STwitterViewModel'
+        '400':
+          description: Invalid request syntax.
+        '422':
+          description: Incomplete author information. Some required fields missing.
+  '/post/{id}':
+    get:
+      tags: [Stwitter Edge Service]
+      summary: Retrieves a stwitter view model with the give post id.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: id of the post you would like to retrieve.
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Stwitter View Model object matching given id.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/STwitterViewModel'
+  '/posts/user/{posterName}':
+    get:
+      tags: [Stwitter Edge Service]
+      summary: Retrieves all posts with the given poster name.
+      parameters:
+        - name: posterName
+          in: path
+          required: true
+          description: Name of the poster whose posts you would like to retrieve.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: List of all books.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Post'
+  /posts:
+    post:
+      tags: [Post Service]
+      summary: Creates a new Post entry with the given information
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Post'
+      responses:
+        '201':
+          description: A post object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Post'
+        '400':
+          description: Invalid request syntax.
+        '422':
+          description: Incomplete post information. Some required fields missing.
+    put:
+      tags: [Post Service]
+      summary: Updates a post object based on information
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Post'
+      responses:
+        '200':
+          description: Author successfully updated.  
+    get:
+      tags: [Post Service]
+      summary: Retrieves ALL entry in the post list.
+      responses:
+        '200':
+          description: List of all posts.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Post'
+  '/posts/{id}':
+    get:
+      tags: [Post Service]
+      summary: Retrieves a post with the give post id.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: id of the post you would like to retrieve.
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Post object matching given id.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Post'
+    delete:
+      tags: [Post Service]
+      summary: Deletes the entry for the post with the given id.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: id of the post you would like to delete.
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Post successfully deleted.
+  /comments:
+    post:
+      tags: [Comment Service]
+      summary: Creates a new comment entry with the given information
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Comment'
+      responses:
+        '201':
+          description: A comment object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Comment'
+        '400':
+          description: Invalid request syntax.
+        '422':
+          description: Incomplete publisher information. Some required fields missing.
+    put:
+      tags: [Comment Service]
+      summary: Updates a Comment object based on information
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Comment'
+      responses:
+        '200':
+          description: Comment successfully updated.  
+    get:
+      tags: [Comment Service]
+      summary: Retrieves ALL entry in the comment list.
+      responses:
+        '200':
+          description: List of all comment.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Comment'
+  /comment/{id}:
+    get:
+      tags: [Comment Service]
+      summary: Retrieves a comment with the give comment id.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: id of the comment you would like to retrieve.
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Comment object matching given id.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Comment'
+    delete:
+      tags: [Comment Service]
+      summary: Deletes the entry for the comment with the given id.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: id of the comment you would like to delete.
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Comment successfully deleted.
+
+
+components:
+  schemas:
+    STwitterViewModel:
+      properties:
+        postId:
+          type: integer
+        post:
+          type: string
+        postDate:
+          type: string
+          pattern: '^\d{4}-\d{2}-\d{2}$'
+        postName:
+          type: string
+        commentList:
+          type: array
+      required:
+        - postId
+        - post
+        - postDate
+        - postName
+    Post:
+      properties:
+        postId:
+          type: integer
+        post:
+          type: string
+        postDate:
+          type: string
+          pattern: '^\d{4}-\d{2}-\d{2}$'
+        postName:
+          type: string
+      required:
+        - postId
+        - post
+        - postDate
+        - postName
+    Comment:
+      properties:
+        commentId:
+          type: integer
+        postId:
+          type: integer
+        createDate:
+          type: string
+          pattern: '^\d{4}-\d{2}-\d{2}$'
+        commentName:
+          type: string
+        comment:
+          type: string  
+      required:
+        - commentId
+        - postId
+        - createDate
+        - commentName
