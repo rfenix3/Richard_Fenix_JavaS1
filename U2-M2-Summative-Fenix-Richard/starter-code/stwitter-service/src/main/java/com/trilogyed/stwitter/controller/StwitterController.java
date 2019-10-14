@@ -5,6 +5,8 @@ import com.trilogyed.stwitter.service.StwitterServiceLayer;
 import com.trilogyed.stwitter.util.feign.PostClient;
 import com.trilogyed.stwitter.viewmodel.StwitterViewModel;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -24,12 +26,14 @@ public class StwitterController {
         this.serviceLayer = serviceLayer;
     }
 
+    @CachePut(key = "#result.getPostId()")
     @RequestMapping(value = "/posts", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
     public StwitterViewModel createPost(@RequestBody @Valid StwitterViewModel stwitterViewModel) throws Exception {
         return serviceLayer.saveStwitterViewModel(stwitterViewModel);
     };
 
+    @Cacheable
     @RequestMapping(value="/posts/{id}", method = RequestMethod.GET)
     @ResponseStatus(value = HttpStatus.OK)
     public StwitterViewModel findPost(@PathVariable int id) throws Exception{
