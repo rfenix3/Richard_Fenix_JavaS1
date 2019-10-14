@@ -25,6 +25,7 @@ public class StwitterController {
     }
 
     @RequestMapping(value = "/posts", method = RequestMethod.POST)
+    @ResponseStatus(HttpStatus.CREATED)
     public StwitterViewModel createPost(@RequestBody @Valid StwitterViewModel stwitterViewModel) throws Exception {
         return serviceLayer.saveStwitterViewModel(stwitterViewModel);
     };
@@ -40,6 +41,7 @@ public class StwitterController {
     }
 
     @RequestMapping(value = "/posts/user/{posterName}", method = RequestMethod.GET)
+    @ResponseStatus(value = HttpStatus.OK)
     public List<StwitterViewModel> findAllPostsForPosterName(@PathVariable String posterName){
         return serviceLayer.findAllPostsForPosterName(posterName);
     };

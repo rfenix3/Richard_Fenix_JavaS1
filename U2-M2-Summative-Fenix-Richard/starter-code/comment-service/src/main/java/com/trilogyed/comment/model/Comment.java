@@ -1,5 +1,10 @@
 package com.trilogyed.comment.model;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
+
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
@@ -10,7 +15,8 @@ public class Comment {
     private int commentId;
 
     private int postId;
-    //@NotEmpty(message = "You must supply a value for Create Date.")
+    @JsonSerialize(using = LocalDateSerializer.class)
+    @JsonDeserialize(using = LocalDateDeserializer.class)
     private LocalDate createDate;
     @NotEmpty(message = "You must supply a value for Description.")
     @Size(max = 50, message = "Commenter Name maximum is 50 characters in length.")

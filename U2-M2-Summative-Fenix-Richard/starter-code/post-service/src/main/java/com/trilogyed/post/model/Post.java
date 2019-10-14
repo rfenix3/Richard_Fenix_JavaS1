@@ -1,6 +1,10 @@
 package com.trilogyed.post.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
@@ -10,7 +14,8 @@ import java.util.Objects;
 public class Post {
 
     private int postId;
-    //@NotEmpty(message = "You must supply a value for Post Date.")
+    @JsonSerialize(using = LocalDateSerializer.class)
+    @JsonDeserialize(using = LocalDateDeserializer.class)
     private LocalDate postDate;
     @NotEmpty(message = "You must supply a value for posterName.")
     @Size(max = 50, message = "Poster Name maximum is 50 characters in length.")

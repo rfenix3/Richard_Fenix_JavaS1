@@ -21,6 +21,7 @@ public class PostController {
     }
 
     @RequestMapping(value = "/posts", method = RequestMethod.POST)
+    @ResponseStatus(value = HttpStatus.CREATED)
     public Post createPost(@RequestBody @Valid Post post) {
         return postDao.addPost(post);
     }

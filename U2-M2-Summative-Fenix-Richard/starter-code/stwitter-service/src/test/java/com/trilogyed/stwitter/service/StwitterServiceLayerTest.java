@@ -1,6 +1,8 @@
 package com.trilogyed.stwitter.service;
 
+import com.trilogyed.stwitter.model.Comment;
 import com.trilogyed.stwitter.model.Post;
+import com.trilogyed.stwitter.util.feign.CommentClient;
 import com.trilogyed.stwitter.util.feign.PostClient;
 import com.trilogyed.stwitter.viewmodel.StwitterViewModel;
 import org.junit.Before;
@@ -26,6 +28,9 @@ public class StwitterServiceLayerTest {
     StwitterServiceLayer stwitterServiceLayer;
     @Mock
     PostClient postClient;
+
+    @Mock
+    CommentClient commentClient;
 
     @Before
     public void setUp() throws Exception {
@@ -92,12 +97,6 @@ public class StwitterServiceLayerTest {
         post2.setPosterName("Richard");
         post2.setPost("Richard's first post.");
 
-//        Post post3 = new Post();
-//        post3.setPostId(3);
-//        post3.setPostDate(LocalDate.of(2019, 9, 16));
-//        post3.setPosterName("Dee");
-//        post3.setPost("Dee's first post.");
-
         List<Post> pList = new ArrayList();
         pList.add(post);
         pList.add(post1);
@@ -105,6 +104,13 @@ public class StwitterServiceLayerTest {
         doReturn(post).when(postClient).createPost(post2);
         doReturn(post).when(postClient).findPost(1);
         doReturn(pList).when(postClient).findPostListByPosterName("Richard");
+    }
+
+    public void setUpCommentClientMock(){
+
+        List <Comment> emptyCommentList = new ArrayList<>();
+
+        doReturn(emptyCommentList).when(commentClient).findCommentsByPostId(1);
     }
 
 }

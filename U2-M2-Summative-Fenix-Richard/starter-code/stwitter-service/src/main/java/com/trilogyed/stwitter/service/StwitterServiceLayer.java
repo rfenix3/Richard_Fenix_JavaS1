@@ -101,12 +101,12 @@ public class StwitterServiceLayer {
         List<Comment> commentList = commentClient.findCommentsByPostId(post.getPostId());
 
         // Get only the comments from the Comment Object and put in a String arraylist.
-        List<String> postComments = new ArrayList<>();
-        for (Comment comment: commentList) {
-            postComments.add(comment.getComment());
-        }
+//        List<String> postComments = new ArrayList<>();
+//        for (Comment comment: commentList) {
+//            postComments.add(comment.getComment());
+//        }
 
-        svm.setComments(postComments);
+        svm.setCommentList(commentList);
 
         // Return the StwitterViewModel
         return svm;
