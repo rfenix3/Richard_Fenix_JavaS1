@@ -1,0 +1,8 @@
+applications:
+  - name: GAME-STORE-AUTHORIZE
+    memory: 1024M
+    instances: 1
+    random-route: true
+    path: ./target/U2-M3-Summative-Fenix-Richard-0.0.1-SNAPSHOT.jar
+    services:
+      - MYSQL-SERVICE

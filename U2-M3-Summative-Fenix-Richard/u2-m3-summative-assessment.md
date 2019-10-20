@@ -26,3 +26,6 @@ You are responsible for creating users and assigning roles so that you can verif
 ### Deployment
 
 After implementing the above changes and verifying that they work locally you must deploy your application to PWS and demonstrate that it is working on that platform.
+
+Note: 
+Use the './mvnw -DskipTests=true package' command to build and package our app(or service()) before we push it to PWS. This command is calling Maven to do this and excluding the test files.
