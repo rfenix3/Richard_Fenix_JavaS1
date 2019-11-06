@@ -10,7 +10,8 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.ArgumentCaptor;
+import org.mockito.*;
+import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -25,21 +26,28 @@ import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.*;
 
-@RunWith(SpringRunner.class)
-@SpringBootTest
+//@RunWith(SpringRunner.class)
+//@SpringBootTest
+@RunWith(MockitoJUnitRunner.class) // This says that this will be unit tested.
 public class TaskerServiceLayerTest {
 
+    @InjectMocks  // we are loading all the beans for below item.
     TaskerServiceLayer service; // Make TaskerServiceLayer's methods available in this class.
-    AdClient adClient;  // Make AdClient's getAd() method be available in this class.
-    TaskerDao dao; // Make TaskerDao's methods available in this class.
+    @Mock
+    AdClient adClient;
+    @Mock  // means we are going to mock below DAOs.
+    TaskerDao dao;
 
     @Before
     public void setUp() throws Exception {
+        MockitoAnnotations.initMocks(this);
         setupTaskerDaoMock();
         setupAdMock();
-        //setupTaskerServiceLayerMock();
 
-        service = new TaskerServiceLayer(dao, adClient);
+        // Mockito will take care of below since @InjectMocks will load all the beans.
+        // We should also comment out the other mock assignments in the setupTaskerDaoMock() and setupAdMock():
+        // i.e. dao = mock(TaskerDaoJdbcTemplateImpl.class);
+        //service = new TaskerServiceLayer(dao, adClient);
 
     }
 
@@ -92,6 +100,8 @@ public class TaskerServiceLayerTest {
     public void saveFindFindAllTaskViewModel() {
         TaskViewModel tvm = new TaskViewModel();
 
+        // No need to set the ID since we are adding the data. The database is expected to
+        // provide the ID.
         tvm.setDescription("Mow lawn");
         tvm.setCreateDate(LocalDate.of(2019, 9, 30));
         tvm.setDueDate(LocalDate.of(2019, 10, 8 ));
@@ -122,7 +132,7 @@ public class TaskerServiceLayerTest {
 
     // Helper methods
     private void setupTaskerDaoMock(){
-        dao = mock(TaskerDaoJdbcTemplateImpl.class);
+        //dao = mock(TaskerDaoJdbcTemplateImpl.class);
         Task task = new Task();
         task.setId(1);
         task.setDescription("Mow lawn");
@@ -151,41 +161,15 @@ public class TaskerServiceLayerTest {
 
         doReturn(task).when(dao).createTask(task2);
         doReturn(task).when(dao).getTask(1);
-        doReturn(tList).when(dao).getAllTasks();
+//        doReturn(tList).when(dao).getAllTasks();
         doReturn(tList).when(dao).getTasksByCategory("house work");
     }
 
     private void setupAdMock(){
-        adClient = mock(AdClient.class);
+        //adClient = mock(AdClient.class);
         String randomAd = "Get a new phone NOW!";
 
         doReturn(randomAd).when(adClient).getAd();
-    }
-
-    private void setupTaskerServiceLayerMock(){
-        service = mock(TaskerServiceLayer.class);
-        TaskViewModel tvm = new TaskViewModel();
-        tvm.setId(1);
-        tvm.setDescription("Mow lawn");
-        tvm.setCreateDate(LocalDate.of(2019, 9, 30));
-        tvm.setDueDate(LocalDate.of(2019, 10, 8 ));
-        tvm.setCategory("house work");
-        tvm.setAdvertisement("Get a new phone NOW!");
-
-
-        // Below is mock retrieved output data when addTask(task2) is ran.
-        TaskViewModel tvm2 = new TaskViewModel();
-        tvm2.setDescription("Mow lawn");
-        tvm2.setCreateDate(LocalDate.of(2019, 9, 30));
-        tvm2.setDueDate(LocalDate.of(2019, 10, 8 ));
-        tvm2.setCategory("house work");
-
-        List<TaskViewModel> tList = new ArrayList();
-        tList.add(tvm);
-
-        doReturn(tvm).when(service).newTask(tvm2);
-        doReturn(tvm).when(service).fetchTask(1);
-        doReturn(tList).when(service).fetchAllTasks();
     }
 
 
