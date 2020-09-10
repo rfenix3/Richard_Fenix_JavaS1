@@ -24,11 +24,21 @@ My application has the following structural elements:
 * Unit test suite utilized mock objects where appropriate
 * Utilized JSR303 for input validation
 
-## Requirements/Features
+**Sample REST Endpoints**
+Method | HTTP request | Description
+------------- | ------------- | -------------
+[**Add New Console - POST**] | **POST** http://localhost:8080/console | Add a new console to DB (PS4, X-Box One, etc).
+[**Get Console By id - GET**] | **GET** http://localhost:8080/console/{console_id} | Get a console by id.
+[**Get All Consoles - GET**] | **GET** http://localhost:8080/console | Get list of all consoles.
+[**Delete Console by id - DELETE**] | **DELETE** http://localhost:8080/console/{console_id} | Delete a console by id.
+[**Update Console - PUT**] | **PUT** http://localhost:8080/console | Update console data.
+
+
+## Features
 
 This system must manage the inventory of video games, game consoles, and t-shirts.
 
-* Your REST API allowed the end user to:
+* The REST API allows the end user to:
     1. Games:
        1. Perform standard CRUD operations for Games
        1. Search for Games by Studio
