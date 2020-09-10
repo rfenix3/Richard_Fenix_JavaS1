@@ -1,4 +1,6 @@
-# Game Store Project
+# Welcome to Video Game Store Inventory Management Project
+
+## Game Store Inventory API
 
 This project involved creating a simple database backed REST inventory management web service for a Video Game Store using Agile development techniques in a solo setting. I designed and documented the REST API and implemented the controller, service, layer, DAO, Java data objects, and unit tests for the application based on an existing database structure.
 
