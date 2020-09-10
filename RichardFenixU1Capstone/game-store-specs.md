@@ -32,7 +32,7 @@ Method | HTTP request | Description
 [**GET**] | **GET** http://localhost:8080/console | Get list of all consoles.
 [**PUT**] | **PUT** http://localhost:8080/console | Update console data.
 [**DELETE**] | **DELETE** http://localhost:8080/console/{console_id} | Delete a console by id.
-[**GET**] | **GET** http://localhost:8080/console/manufacturer/manufacturer | Get console list by manufacturer.
+[**GET**] | **GET** http://localhost:8080/console/manufacturer/manufacturer | Get console list by manufacturer name.
 
 
 ## Features
@@ -226,6 +226,6 @@ Load the following processing fees into your database:
 
 ---
 
-© 2019 Trilogy Education Services
+<!--© 2019 Trilogy Education Services -->
 
 
